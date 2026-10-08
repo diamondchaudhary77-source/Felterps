@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<meta name="theme-color" content="#714B67">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Decor ERP">
+<title>Handmade Decor ERP - Version 6.4</title>
+<style>
+*{box-sizing:border-box}
+:root{--p:#714B67;--p2:#8d6381;--bg:#f4f5f7;--card:#fff;--text:#222;--muted:#6b7280;--line:#ddd;--green:#16803c;--red:#c62828;--orange:#d97706;--blue:#2563eb}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;border:0;border-radius:7px;padding:9px 13px}
+.btn{background:var(--p);color:white}.btn:hover{background:var(--p2)}
+.btn2{background:#e9e9ee;color:#222}.danger{background:#c62828;color:white}.success{background:#16803c;color:white}.warn{background:#d97706;color:white}.info{background:#2563eb;color:white}
+.top{background:var(--p);color:#fff;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20}
+.brand{font-size:19px;font-weight:bold}.userbox{font-size:12px;text-align:right}
+.layout{display:flex;min-height:calc(100vh - 54px)}
+.side{width:220px;background:#28232a;color:white;padding:10px;position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto}
+.side button{display:block;width:100%;margin:5px 0;text-align:left;background:transparent;color:#eee}
+.side button:hover,.side button.active{background:#714B67}
+.main{flex:1;padding:15px;min-width:0}
+.page{display:none}.page.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:15px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:15px;box-shadow:0 1px 2px #0000000a}
+.metric{font-size:25px;font-weight:bold;margin-top:5px}.muted{color:var(--muted);font-size:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+label{font-size:13px;font-weight:bold;display:block;margin-bottom:4px}
+input,select,textarea{width:100%;padding:9px;border:1px solid #ccc;border-radius:7px;background:white}
+input:disabled,select:disabled{background:#f0f0f0;color:#555}
+textarea{min-height:70px;resize:vertical}
+.section-title{font-size:18px;font-weight:bold;margin:0 0 12px}
+.tablewrap{overflow:auto;background:white;border-radius:9px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;min-width:720px}
+th,td{padding:9px;border-bottom:1px solid #eee;text-align:left;font-size:13px;vertical-align:top}
+th{background:#f0edf0}
+.actions{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.badge{display:inline-block;padding:4px 7px;border-radius:20px;font-size:11px;font-weight:bold}
+.pending{background:#fff1c7;color:#875d00}.sent{background:#dbeafe;color:#1d4ed8}.production{background:#ede9fe;color:#6d28d9}.finished{background:#dcfce7;color:#166534}.sold{background:#d1fae5;color:#065f46}.cancelled{background:#fee2e2;color:#991b1b}
+.chartbar{height:25px;background:#eee;border-radius:5px;overflow:hidden}.chartbar>div{height:100%;background:var(--p);color:white;padding:4px 7px;font-size:12px;min-width:25px}
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#714B67,#29232b)}
+.loginbox{width:100%;max-width:390px;background:white;border-radius:14px;padding:25px;box-shadow:0 15px 50px #0005}
+.loginbox h1{margin-top:0;color:var(--p)}
+.hidden{display:none!important}
+.notice{padding:10px;border-radius:7px;background:#fff8df;border:1px solid #f1d47b;margin-bottom:10px}
+img.thumb{width:55px;height:55px;object-fit:cover;border-radius:6px;border:1px solid #ddd}
+.kpi-green{color:var(--green)}.kpi-red{color:var(--red)}
+.small{font-size:11px}
+.toast{position:fixed;right:15px;bottom:15px;background:#222;color:white;padding:11px 15px;border-radius:8px;display:none;z-index:100}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}.grid2,.grid3{grid-template-columns:1fr}.side{width:175px}}
+@media(max-width:650px){.layout{display:block}.side{position:sticky;top:54px;width:100%;height:auto;display:flex;overflow:auto;padding:5px;z-index:15}.side button{min-width:max-content;margin:2px;padding:8px}.main{padding:9px}.cards{grid-template-columns:1fr 1fr}.formgrid{grid-template-columns:1fr}.brand{font-size:15px}.userbox{font-size:10px}}
+@media print{
+  body{background:#fff}
+  .side,.top,.toast,#v6SafetyBadge,.notice,.actions,button,label.btn2{display:none!important}
+  .layout{display:block!important}
+  .main{padding:0!important}
+  .page{display:none!important}
+  .page.active{display:block!important}
+  .card{box-shadow:none;border:1px solid #999}
+  table{min-width:0}
+}
+</style>
+</head>
+<body>
+
+<div id="loginScreen" class="login">
+<div class="loginbox">
+<h1>🏭 Handmade Decor ERP</h1>
+<p class="muted">Version 6.4 • Accounting Enabled • Works offline on Android</p>
+<label>Username</label><input id="loginUser" placeholder="admin">
+<label style="margin-top:10px">Password</label><input id="loginPass" type="password" placeholder="admin123">
+<button class="btn" style="width:100%;margin-top:15px" onclick="login()">LOGIN</button>
+<div class="notice" style="margin-top:15px">
+<b>Demo logins</b><br>
+Admin: <b>admin / admin123</b><br>
+Branch 1: <b>branch1 / branch123</b><br>
+Branch 2: <b>branch2 / branch123</b><br>
+Branch 3: <b>branch3 / branch123</b><br>
+Branch 4: <b>branch4 / branch123</b><br>
+Branch 5: <b>branch5 / branch123</b>
+</div>
+</div></div>
+
+<div id="app" class="hidden">
+<header class="top">
+<div class="brand">🏭 Handmade Decor ERP</div>
+<div class="userbox">
+  <span id="who"></span><br>
+  <button onclick="window.print()" style="padding:4px 8px;background:#fff;color:#714B67;margin-right:4px">Print</button>
+  <button onclick="logout()" style="padding:4px 8px;background:#fff;color:#714B67">Logout</button>
+</div>
+</header>
+<div class="layout">
+<nav class="side" id="nav"></nav>
+<main class="main">
+
+<section id="dashboard" class="page active">
+<h2>Dashboard</h2>
+<div class="cards" id="dashCards"></div>
+<div class="grid2">
+<div class="card"><div class="section-title">Branch Production</div><div id="branchChart"></div></div>
+<div class="card"><div class="section-title">Recent Orders</div><div id="recentOrders"></div></div>
+</div>
+</section>
+
+<section id="orders" class="page">
+<h2>Customer Orders</h2>
+<div class="card" id="orderFormCard">
+<div class="section-title">Create / Edit Order</div>
+<div class="formgrid">
+<div><label>Customer</label><input id="oCustomer"></div>
+<div><label>Order Date</label><input id="oDate" type="date"></div>
+<div><label>Product</label><input id="oProduct"></div>
+<div><label>Quantity</label><input id="oQty" type="number" min="1" value="1"></div>
+<div><label>Selling Price / Unit</label><input id="oPrice" type="number" min="0" step="0.01" value="0"></div>
+<div><label>Assign Branch</label><select id="oBranch"></select></div>
+<div><label>Product Image</label><input id="oImage" type="file" accept="image/*"></div>
+<div><label>Notes</label><input id="oNotes"></div>
+</div>
+<div class="actions" style="margin-top:10px"><button class="btn" onclick="saveOrder()">Save Order</button><button class="btn2" onclick="clearOrderForm()">Clear</button></div>
+<input id="editOrderId" type="hidden">
+</div>
+
+<div class="card" style="margin-top:15px">
+<div class="section-title">Order List</div>
+<div class="actions" style="margin-bottom:10px">
+  <input id="orderSearch" placeholder="Search customer, product or order ID…"
+         oninput="orderSearch=this.value;renderOrders()" style="max-width:300px">
+  <select onchange="orderStatusFilter=this.value;renderOrders()" style="max-width:220px">
+    <option>All</option><option>Pending</option><option>Sent to Branch</option>
+    <option>In Production</option><option>Assembly Complete</option>
+    <option>Finished Goods Received</option><option>Completed</option><option>Cancelled</option>
+  </select>
+</div>
+<div class="tablewrap"><table><thead><tr><th>Order</th><th>Customer</th><th>Product</th><th>Qty</th><th>Branch</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead><tbody id="orderTable"></tbody></table></div>
+</div>
+</section>
+
+<section id="production" class="page">
+<h2>Production / Branch Work</h2>
+<div class="notice">Workflow: <b>Order Received → Sent to Branch → In Production → Assembly Complete → Finished Goods Returned → Completed</b></div>
+<div class="card"><div class="tablewrap"><table><thead><tr><th>Order</th><th>Product</th><th>Branch</th><th>Qty</th><th>Material Cost</th><th>Labour Cost</th><th>Total Cost</th><th>Status / Action</th></tr></thead><tbody id="productionTable"></tbody></table></div></div>
+</section>
+
+<section id="inventory" class="page">
+<h2>Inventory & Stock</h2>
+<div class="cards" id="inventoryCards"></div>
+<div class="grid2">
+<div class="card"><div class="section-title">Raw Material Stock</div><div class="tablewrap"><table><thead><tr><th>Material</th><th>Stock</th><th>Unit</th><th>Avg Price</th><th>Value</th><th>Status</th></tr></thead><tbody id="rawStockTable"></tbody></table></div></div>
+<div class="card"><div class="section-title">Finished Goods Stock</div><div class="tablewrap"><table><thead><tr><th>Product</th><th>Stock</th><th>Status</th></tr></thead><tbody id="fgStockTable"></tbody></table></div></div>
+</div>
+<div class="card" style="margin-top:15px"><div class="section-title">Stock Movement History</div><div class="tablewrap"><table><thead><tr><th>Date</th><th>Type</th><th>Item</th><th>Qty</th><th>Unit</th><th>Reference</th><th>Branch</th></tr></thead><tbody id="stockMovementTable"></tbody></table></div></div>
+</section>
+
+<section id="issue" class="page">
+<h2>Material Issue to Branch</h2>
+<div class="notice">Head Office sends BOM materials from Head Office stock to the selected branch.</div>
+<div class="notice" style="margin-top:8px">
+If an existing BOM is not found, tap <b>Fix BOM Names</b> once. This removes extra spaces from old BOM records.
+<button class="btn2" style="margin-left:8px" onclick="normalizeBOMRecords()">Fix BOM Names</button>
+</div>
+<div class="card"><div class="section-title">Orders Waiting for Material</div><div class="tablewrap"><table><thead><tr><th>Order</th><th>Product</th><th>Branch</th><th>Qty</th><th>Status</th><th>Action</th></tr></thead><tbody id="issueOrderTable"></tbody></table></div></div>
+<div class="card" style="margin-top:15px"><div class="section-title">Material Issue History</div><div class="tablewrap"><table><thead><tr><th>Date</th><th>Branch</th><th>Material</th><th>Qty</th><th>Unit</th><th>Reference</th><th>Note</th></tr></thead><tbody id="issueTable"></tbody></table></div></div>
+</section>
+
+<section id="branchstock" class="page">
+<h2>Branch Stock</h2>
+<div class="card"><div class="formgrid"><div><label>Branch</label><select id="stockBranch" onchange="renderBranchStock()"></select></div></div></div>
+<div class="card" style="margin-top:15px"><div class="section-title">Materials at Branch</div><div class="tablewrap"><table><thead><tr><th>Material</th><th>Qty</th><th>Unit</th><th>Price/Unit</th><th>Value</th><th>Action</th></tr></thead><tbody id="branchStockTable"></tbody></table></div></div>
+</section>
+
+<section id="bom" class="page">
+<h2>BOM & Labour Cost</h2>
+<div class="card">
+<div class="section-title">Create / Edit BOM</div>
+<div class="formgrid">
+<div><label>Product</label><input id="bProduct"></div>
+<div><label>Material Name</label><input id="bMaterial"></div>
+<div><label>Qty per Unit</label><input id="bQty" type="number" step="0.001" min="0"></div>
+<div><label>Unit</label><input id="bUnit" placeholder="kg / pcs / m"></div>
+<div><label>Material Price / Unit</label><input id="bPrice" type="number" step="0.01" min="0"></div>
+<div><label>Labour / Unit</label><input id="bLabour" type="number" step="0.01" min="0"></div>
+</div>
+<div class="actions" style="margin-top:10px"><button class="btn" onclick="saveBom()">Save BOM</button><button class="btn2" onclick="clearBomForm()">Clear</button></div>
+<input id="editBomId" type="hidden">
+</div>
+<div class="card" style="margin-top:15px"><div class="tablewrap"><table><thead><tr><th>Product</th><th>Material</th><th>Qty</th><th>Unit</th><th>Price/Unit</th><th>Material Cost</th><th>Labour/Unit</th><th>Actions</th></tr></thead><tbody id="bomTable"></tbody></table></div></div>
+</section>
+
+<section id="purchases" class="page">
+<h2>Purchases</h2>
+<div class="card">
+<div class="section-title">Add / Edit Purchase</div>
+<div class="formgrid">
+<div><label>Date</label><input id="pDate" type="date"></div>
+<div><label>Supplier</label><input id="pSupplier"></div>
+<div><label>Material</label><input id="pMaterial"></div>
+<div><label>Quantity</label><input id="pQty" type="number" min="0" step="0.001"></div>
+<div><label>Unit</label><input id="pUnit" placeholder="pcs/kg/m"></div>
+<div><label>Price / Unit</label><input id="pPrice" type="number" min="0" step="0.01"></div>
+<div><label>Payment Type</label><select id="pPay"><option>Cash</option><option>Credit</option><option>Bank</option></select></div>
+</div>
+<div class="actions" style="margin-top:10px"><button class="btn" onclick="savePurchase()">Save Purchase</button><button class="btn2" onclick="clearPurchaseForm()">Clear</button></div>
+<input id="editPurchaseId" type="hidden">
+</div>
+<div class="card" style="margin-top:15px"><div class="tablewrap"><table><thead><tr><th>Date</th><th>Supplier</th><th>Material</th><th>Qty</th><th>Unit</th><th>Price/Unit</th><th>Total</th><th>Payment</th><th>Actions</th></tr></thead><tbody id="purchaseTable"></tbody></table></div></div>
+</section>
+
+<section id="sales" class="page">
+<h2>Sales</h2>
+<div class="card">
+<div class="section-title">Add / Edit Sale</div>
+<div class="formgrid">
+<div><label>Date</label><input id="sDate" type="date"></div>
+<div><label>Customer</label><input id="sCustomer"></div>
+<div><label>Product</label><input id="sProduct"></div>
+<div><label>Quantity</label><input id="sQty" type="number" min="1"></div>
+<div><label>Price / Unit</label><input id="sPrice" type="number" min="0" step="0.01"></div>
+<div><label>Payment</label><select id="sPay"><option>Cash</option><option>Credit</option><option>Bank</option></select></div>
+</div>
+<div class="actions" style="margin-top:10px"><button class="btn" onclick="saveSale()">Save Sale</button><button class="btn2" onclick="clearSaleForm()">Clear</button></div>
+<input id="editSaleId" type="hidden">
+</div>
+<div class="card" style="margin-top:15px"><div class="tablewrap"><table><thead><tr><th>Date</th><th>Customer</th><th>Product</th><th>Qty</th><th>Price/Unit</th><th>Total</th><th>Payment</th><th>Actions</th></tr></thead><tbody id="salesTable"></tbody></table></div></div>
+</section>
+
+<section id="finance" class="page">
+<h2>Finance</h2>
+<div class="cards" id="financeCards"></div>
+<div class="card"><div class="section-title">Financial Summary</div><div id="financeSummary"></div></div>
+</section>
+
+<section id="reports" class="page">
+<h2>Reports</h2>
+<div class="cards" id="reportCards"></div>
+<div class="grid2">
+<div class="card"><div class="section-title">Production by Branch</div><div id="reportBranches"></div></div>
+<div class="card"><div class="section-title">Order Status</div><div id="reportStatus"></div></div>
+</div>
+<div class="card" style="margin-top:15px"><div class="section-title">Branch Details</div><div class="tablewrap"><table><thead><tr><th>Branch</th><th>Orders</th><th>Units</th><th>Sales Value</th><th>Production Cost</th></tr></thead><tbody id="branchReportTable"></tbody></table></div></div>
+</section>
+
+<section id="branches" class="page">
+<h2>Branches</h2>
+<div class="card"><div class="section-title">Branch Access</div><div class="tablewrap"><table><thead><tr><th>Branch</th><th>Username</th><th>Password</th><th>Access</th></tr></thead><tbody id="branchTable"></tbody></table></div></div>
+</section>
+
+<section id="backup" class="page">
+<h2>Backup & Settings</h2>
+<div class="card">
+<h3>Data Backup</h3>
+<p class="muted">Save all ERP data to your phone as a JSON file. You can restore it later.</p>
+<div class="actions"><button class="btn" onclick="backup()">Download Backup</button><label class="btn2" style="display:inline-block;cursor:pointer">Restore Backup<input type="file" accept=".json" onchange="restore(event)" style="display:none"></label></div>
+<hr>
+<h3>Stock Repair</h3>
+<p class="muted">Recalculates all Head Office and Branch stock from purchases, issues, returns and production movements. Use this if stock numbers look wrong.</p>
+<div class="actions"><button class="warn" onclick="manualRebuildStock()">Rebuild Stock Ledger</button><button class="danger" onclick="resetData()">Reset All Data</button></div>
+<hr>
+<h3>Company Workflow</h3>
+<p>Customer Order → Branch Production → Assembly → Finished Goods → Head Office → Sale → Finance.</p>
+</div>
+</section>
+
+</main></div></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const KEY="HD_ERP_COMPLETE_V3";
+let db=JSON.parse(localStorage.getItem(KEY)||"null")||{
+ orders:[], bom:[], purchases:[], sales:[], stock:{raw:{},fg:{}}, movements:[], issues:[], bs:{},
+ branches:[
+  {id:"B1",name:"Branch 1",user:"branch1",pass:"branch123"},
+  {id:"B2",name:"Branch 2",user:"branch2",pass:"branch123"},
+  {id:"B3",name:"Branch 3",user:"branch3",pass:"branch123"},
+  {id:"B4",name:"Branch 4",user:"branch4",pass:"branch123"},
+  {id:"B5",name:"Branch 5",user:"branch5",pass:"branch123"}
+ ]};
+let session=null;
+db.issues??=[];db.bs??={};
+
+/* ============ ORDER FILTER STATE ============ */
+let orderSearch="";
+let orderStatusFilter="All";
+
+/* ============ IDLE TIMEOUT ============ */
+let idleTimer, IDLE_MS = 10*60*1000;
+function resetIdle(){
+  clearTimeout(idleTimer);
+  if(!session) return;
+  idleTimer=setTimeout(()=>{logout();alert("Session timed out after 10 minutes of inactivity.")},IDLE_MS);
+}
+["click","keydown","touchstart","mousemove"].forEach(e=>document.addEventListener(e,resetIdle,{passive:true}));
+
+/* ============ PASSWORD HASHING ============ */
+async function sha256(s){
+  if(!(window.crypto && crypto.subtle)) return "plain:"+s;
+  try{
+    const b=new TextEncoder().encode(s);
+    const h=await crypto.subtle.digest("SHA-256",b);
+    return "sha:"+[...new Uint8Array(h)].map(x=>x.toString(16).padStart(2,"0")).join("");
+  }catch(e){ return "plain:"+s; }
+}
+async function migratePasswords(){
+  let changed=false;
+  if(!db.adminHash){ db.adminHash=await sha256("admin123"); changed=true; }
+  for(const b of db.branches||[]){
+    if(b.pass && !b.passHash){ b.passHash=await sha256(b.pass); delete b.pass; changed=true; }
+  }
+  if(changed) saveDB();
+}
+
+/* ============ HELPERS ============ */
+function saveDB(){localStorage.setItem(KEY,JSON.stringify(db))}
+function id(prefix){return prefix+"_"+Date.now()+"_"+Math.random().toString(36).slice(2,7)}
+function money(n){return "Rs. "+Number(n||0).toLocaleString("en-IN",{minimumFractionDigits:2,maximumFractionDigits:2})}
+function num(v){return Number(v)||0}
+function productKey(v){
+  return String(v ?? "").normalize("NFKC").trim().toLowerCase()
+    .replace(/\s+/g,"").replace(/[^a-z0-9\u0900-\u097f]/g,"");
+}
+function findBomForProduct(product){
+  const p=productKey(product);
+  return (db.bom||[]).filter(b=>{
+    const bp=productKey(b.product);
+    return bp===p || String(b.product??"").trim().toLowerCase()===String(product??"").trim().toLowerCase();
+  });
+}
+function today(){return new Date().toISOString().slice(0,10)}
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function toast(s){let x=document.getElementById("toast");x.textContent=s;x.style.display="block";setTimeout(()=>x.style.display="none",1800)}
+function branchName(id){let b=db.branches.find(x=>x.id===id);return b?b.name:"—"}
+function canAdmin(){return session?.role==="admin"}
+function visibleOrders(){return canAdmin()?db.orders:db.orders.filter(o=>o.branchId===session.branchId)}
+function visiblePurchases(){return canAdmin()?db.purchases:[]}
+function visibleSales(){return canAdmin()?db.sales:[]}
+
+/* ============ AUTH ============ */
+async function login(){
+  await migratePasswords();
+  const u=document.getElementById("loginUser").value.trim();
+  const p=document.getElementById("loginPass").value;
+  const h=await sha256(p);
+  if(u==="admin" && h===db.adminHash) session={role:"admin",name:"Administrator"};
+  else{
+    const b=(db.branches||[]).find(x=>x.user===u && x.passHash===h);
+    if(b) session={role:"branch",name:b.name,branchId:b.id};
+  }
+  if(!session){alert("Wrong username or password");return}
+  document.getElementById("loginScreen").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+  document.getElementById("who").textContent=session.name+(session.role==="admin"?" (Admin)":"");
+  buildNav(); initDates(); refreshAll(); showPage("dashboard"); resetIdle();
+}
+function logout(){session=null;clearTimeout(idleTimer);document.getElementById("app").classList.add("hidden");document.getElementById("loginScreen").classList.remove("hidden")}
+function buildNav(){
+ let items=canAdmin()?[
+ ["dashboard","📊 Dashboard"],["orders","📝 Orders"],["production","🏭 Production"],["inventory","📦 Inventory"],["issue","🚚 Material Issue"],["branchstock","🏢 Branch Stock"],["bom","🧩 BOM"],["purchases","📦 Purchases"],["sales","💰 Sales"],["finance","🧾 Finance"],["reports","📈 Reports"],["branches","🏢 Branches"],["backup","⚙️ Backup"]
+ ]:[["dashboard","📊 Dashboard"],["orders","📝 My Orders"],["production","🏭 Production"],["inventory","📦 My Stock"],["branchstock","🏢 Branch Stock"],["bom","🧩 BOM"],["backup","⚙️ Backup"]];
+ document.getElementById("nav").innerHTML=items.map(a=>`<button onclick="showPage('${a[0]}')">${a[1]}</button>`).join("");
+}
+function showPage(id){
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+ document.getElementById(id)?.classList.add("active");
+ document.querySelectorAll(".side button").forEach(x=>x.classList.toggle("active",x.getAttribute("onclick")?.includes("'"+id+"'")));
+ refreshAll();
+}
+function initDates(){
+ ["oDate","pDate","sDate"].forEach(x=>document.getElementById(x).value=today());
+ const br=document.getElementById("oBranch");
+ br.innerHTML=db.branches.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join("");
+ if(session?.role==="branch"){br.value=session.branchId;br.disabled=true;}
+ else{br.disabled=false;}
+}
+function refreshAll(){renderDashboard();renderOrders();renderProduction();renderInventory();renderIssue();renderBranchStock();renderBom();renderPurchases();renderSales();renderFinance();renderReports();renderBranches()}
+function statusBadge(s){let c={Pending:"pending","Sent to Branch":"sent","In Production":"production","Assembly Complete":"finished","Finished Goods Received":"finished",Completed:"sold",Cancelled:"cancelled"}[s]||"pending";return `<span class="badge ${c}">${esc(s)}</span>`}
+
+/* ============ ORDERS ============ */
+async function saveOrder(){
+ let customer=document.getElementById("oCustomer").value.trim(),product=document.getElementById("oProduct").value.trim();
+ if(!customer||!product||num(document.getElementById("oQty").value)<=0){alert("Enter customer, product and quantity");return}
+ let file=document.getElementById("oImage").files[0], image="";
+ if(file)image=await readFile(file);
+ let eid=document.getElementById("editOrderId").value;
+ const branchId = session?.role==="branch" ? session.branchId : document.getElementById("oBranch").value;
+ let data={customer,date:document.getElementById("oDate").value,product,qty:num(document.getElementById("oQty").value),price:num(document.getElementById("oPrice").value),branchId,notes:document.getElementById("oNotes").value};
+ if(eid){
+  let o=db.orders.find(x=>x.id===eid);if(!o)return;
+  const productChanged = productKey(o.product)!==productKey(data.product);
+  const qtyChanged = num(o.qty)!==num(data.qty);
+  if(o.materialIssued && (productChanged||qtyChanged)){
+    if(!["Pending","Sent to Branch"].includes(o.status)){
+      alert("Cannot change product or quantity: production has already started for this order.\n\nComplete or cancel it first.");
+      return;
+    }
+    if(!confirm("Material was already issued for this order.\n\nChanging the product or quantity will reset it to 'Sent to Branch' and Head Office must issue material again.\n\nPreviously issued material stays in branch stock and can be returned manually.\n\nContinue?")) return;
+    o.materialIssued=false;
+    o.status="Sent to Branch";
+  }
+  Object.assign(o,data);if(image)o.image=image;
+  toast("Order updated");
+ }else{
+  db.orders.push({id:id("ORD"),...data,image,status:"Pending",created:new Date().toISOString()});
+  toast("Order created");
+ }
+ saveDB();clearOrderForm();refreshAll();
+}
+function readFile(f){return new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f)})}
+function clearOrderForm(){
+ ["oCustomer","oProduct","oNotes","editOrderId"].forEach(x=>document.getElementById(x).value="");
+ document.getElementById("oQty").value=1;document.getElementById("oPrice").value=0;
+ document.getElementById("oDate").value=today();document.getElementById("oImage").value="";
+ if(session?.role==="branch")document.getElementById("oBranch").value=session.branchId;
+}
+function editOrder(i){
+ let o=db.orders.find(x=>x.id===i);if(!o)return;
+ if(session.role==="branch"&&o.branchId!==session.branchId)return;
+ ["oCustomer","oProduct","oNotes"].forEach((x,j)=>document.getElementById(x).value=[o.customer,o.product,o.notes||""][j]);
+ document.getElementById("oDate").value=o.date;document.getElementById("oQty").value=o.qty;
+ document.getElementById("oPrice").value=o.price;document.getElementById("oBranch").value=o.branchId;
+ document.getElementById("editOrderId").value=o.id;showPage("orders");scrollTo(0,0)
+}
+function delOrder(i){
+ const o=db.orders.find(x=>x.id===i);if(!o)return;
+ if(!canAdmin() && o.branchId!==session?.branchId) return;
+ if(o.materialIssued || o.fgReceived || o.status==="Completed"){
+   alert("This order already has material, finished goods or a sale attached.\n\nCancel it instead of deleting, or reverse the related records first.");
+   return;
+ }
+ if(!confirm("Delete this order?"))return;
+ db.orders=db.orders.filter(x=>x.id!==i);saveDB();refreshAll();toast("Order deleted")
+}
+
+/* ============ ORDER ACTIONS ============ */
+function orderAction(i,newStatus){
+ let o=db.orders.find(x=>x.id===i);if(!o)return;
+ if(session.role==="branch"&&o.branchId!==session.branchId)return;
+ if(newStatus==="In Production"){
+  if(!o.materialIssued){alert("Head Office must issue the BOM materials to this branch first.");return}
+  if(!findBomForProduct(o.product).length){alert("No BOM is defined for: "+o.product+"\n\nPlease ask Head Office to create the BOM first.");return}
+  if(!consumeBranchMaterials(o)){alert("Branch stock is not enough for this order. Please ask Head Office for more material.");return}
+ }
+ if(newStatus==="Assembly Complete"&&o.status!=="In Production"){alert("Start production first.");return}
+ if(newStatus==="Finished Goods Received"&&o.status!=="Assembly Complete"){alert("Assembly must be completed first.");return}
+ if(newStatus==="Finished Goods Received"&&!o.fgReceived)addFG(o.product,o.qty,o.id);
+ if(newStatus==="Finished Goods Received")o.fgReceived=true;
+ o.status=newStatus;saveDB();refreshAll();toast("Status changed to "+newStatus)
+}
+function completeOrderSale(i){
+ let o=db.orders.find(x=>x.id===i);if(!o)return;
+ if(!consumeFG(o.product,o.qty,o.id)){alert("Not enough finished goods stock. Receive finished goods first.");return}
+ o.status="Completed";
+ db.sales.push({id:id("SAL"),date:today(),customer:o.customer,product:o.product,qty:o.qty,price:o.price,payment:"Credit",orderId:o.id});
+ saveDB();refreshAll();toast("Order completed and sale recorded")
+}
+function cancelOrder(orderId){
+  const o=db.orders.find(x=>x.id===orderId);
+  if(!o) return;
+  if(!canAdmin() && o.branchId !== session?.branchId) return;
+  if(o.status === "Cancelled") return;
+
+  const past = ["In Production","Assembly Complete","Finished Goods Received","Completed"].includes(o.status);
+  const msg = past
+    ? "This order is already in production or beyond.\n\nCancelling will NOT return raw materials (they are part of in-progress work) and will NOT undo finished goods.\n\nContinue?"
+    : (o.materialIssued
+        ? "Cancel this order?\n\nAll issued material will be returned from the branch to Head Office."
+        : "Cancel this order?");
+  if(!confirm(msg)) return;
+
+  if(o.materialIssued && o.status === "Sent to Branch"){
+    const items = findBomForProduct(o.product);
+    for(const b of items){
+      const need = num(b.qty) * num(o.qty);
+      const k = bsKey(o.branchId, b.material, b.unit);
+      const x = db.bs[k];
+      if(x && x.qty > 0){
+        const give = Math.min(need, x.qty);
+        returnMaterial(o.branchId, b.material, give, b.unit, "CANCEL_"+o.id);
+      }
+    }
+  }
+
+  o.status = "Cancelled";
+  saveDB(); refreshAll(); toast("Order cancelled");
+}
+
+/* ============ ORDER RENDER ============ */
+function renderOrders(){
+ let rows=visibleOrders();
+ if(orderSearch.trim()){
+   const q=orderSearch.trim().toLowerCase();
+   rows=rows.filter(o=>
+     String(o.id||"").toLowerCase().includes(q) ||
+     String(o.customer||"").toLowerCase().includes(q) ||
+     String(o.product||"").toLowerCase().includes(q)
+   );
+ }
+ if(orderStatusFilter && orderStatusFilter!=="All"){
+   rows=rows.filter(o=>o.status===orderStatusFilter);
+ }
+ const sEl=document.getElementById("orderSearch");
+ if(sEl && sEl.value!==orderSearch) sEl.value=orderSearch;
+
+ document.getElementById("orderTable").innerHTML=rows.length?rows.map(o=>`<tr>
+ <td><b>${esc(o.id)}</b><br><span class="small">${esc(o.date)}</span>${o.image?`<br><img class="thumb" src="${o.image}">`:""}</td>
+ <td>${esc(o.customer)}</td><td>${esc(o.product)}</td><td>${o.qty}</td><td>${branchName(o.branchId)}</td>
+ <td>${money(o.qty*o.price)}</td><td>${statusBadge(o.status)}<br><span class="small">${o.materialIssued?"Material Issued":"Material Not Issued"}</span></td>
+ <td><div class="actions">
+ ${canAdmin()&&o.status==="Pending"?`<button class="info" onclick="orderAction('${o.id}','Sent to Branch')">Send</button>`:""}
+ ${canAdmin()&&o.status==="Sent to Branch"&&!o.materialIssued?`<button class="warn" onclick="issueOrderMaterials('${o.id}')">Issue Material</button>`:""}
+ ${session.role==="branch"&&o.status==="Sent to Branch"?`<button class="info" onclick="orderAction('${o.id}','In Production')">Start</button>`:""}
+ ${session.role==="branch"&&o.status==="In Production"?`<button class="success" onclick="orderAction('${o.id}','Assembly Complete')">Assembly Done</button>`:""}
+ ${canAdmin()&&o.status==="Assembly Complete"?`<button class="success" onclick="orderAction('${o.id}','Finished Goods Received')">Receive FG</button>`:""}
+ ${canAdmin()&&o.status==="Finished Goods Received"?`<button class="success" onclick="completeOrderSale('${o.id}')">Complete / Sell</button>`:""}
+ ${!["Completed","Cancelled"].includes(o.status)?`<button class="warn" onclick="cancelOrder('${o.id}')">Cancel</button>`:""}
+ <button class="btn2" onclick="editOrder('${o.id}')">Edit</button><button class="danger" onclick="delOrder('${o.id}')">Delete</button>
+ </div></td></tr>`).join(""):`<tr><td colspan="8">No orders found.</td></tr>`;
+}
+
+/* ============ STOCK CORE ============ */
+function ensureStock(){if(!db.stock)db.stock={raw:{},fg:{}};if(!db.stock.raw)db.stock.raw={};if(!db.stock.fg)db.stock.fg={};if(!db.movements)db.movements=[]}
+function rawKey(n,u){return n.trim().toLowerCase()+"|"+String(u||"").trim().toLowerCase()}
+function addRawStock(n,q,u,p,ref,type,branch){ensureStock();let k=rawKey(n,u),x=db.stock.raw[k]||{name:n,unit:u,qty:0,value:0,avgPrice:0};q=num(q);p=num(p);x.qty+=q;x.value+=q*p;x.avgPrice=x.qty?x.value/x.qty:0;db.stock.raw[k]=x;db.movements.push({date:today(),type,item:n,qty:q,unit:u,reference:ref,branch:branch||"Head Office"})}
+function addFG(product,q,ref){ensureStock();let k=product.trim().toLowerCase(),x=db.stock.fg[k]||{product,qty:0};x.qty+=num(q);db.stock.fg[k]=x;db.movements.push({date:today(),type:"Finished Goods Received",item:product,qty:num(q),unit:"pcs",reference:ref,branch:"Head Office"})}
+function consumeFG(product,q,ref){ensureStock();let x=db.stock.fg[product.trim().toLowerCase()];q=num(q);if(!x||x.qty<q)return false;x.qty-=q;db.movements.push({date:today(),type:"Sale",item:product,qty:-q,unit:"pcs",reference:ref,branch:"Head Office"});return true}
+function ensureBranchStock(){db.bs??={};db.issues??=[]}
+function bsKey(branch,material,unit){return branch+"|"+rawKey(material,unit)}
+function addBranchStock(branch,material,qty,unit,price,ref){ensureBranchStock();let k=bsKey(branch,material,unit),x=db.bs[k]||{branch,name:material,unit,qty:0,price:num(price)};x.qty+=num(qty);if(num(price)>0)x.price=num(price);db.bs[k]=x}
+function takeBranchStock(branch,material,qty,unit,ref){ensureBranchStock();let k=bsKey(branch,material,unit),x=db.bs[k];qty=num(qty);if(!x||x.qty<qty)return false;x.qty-=qty;db.movements.push({date:today(),type:"Branch Production Consumption",item:material,qty:-qty,unit,reference:ref,branch});return true}
+function issueMaterial(branch,material,qty,unit,ref,note){
+ ensureStock();qty=num(qty);
+ let k=rawKey(material,unit),x=db.stock.raw[k];
+ if(!x||x.qty<qty)return false;
+ let price=x.avgPrice;
+ x.qty-=qty;x.value=Math.max(0,x.value-qty*price);x.avgPrice=x.qty?x.value/x.qty:0;
+ addBranchStock(branch,material,qty,unit,price,ref);
+ let z={id:id("ISS"),date:today(),branch,material,qty,unit,ref,note:note||"",price};
+ db.issues.push(z);
+ db.movements.push({date:today(),type:"Material Issued to Branch",item:material,qty:-qty,unit,reference:ref,branch});
+ return true
+}
+function returnMaterial(branch,material,qty,unit,ref){
+ ensureBranchStock();qty=num(qty);
+ let k=bsKey(branch,material,unit),x=db.bs[k];
+ if(!x||x.qty<qty)return false;
+ let price=num(x.price);
+ x.qty-=qty;
+ addRawStock(material,qty,unit,price,ref,"Material Returned",branch);
+ return true
+}
+function issueOrderMaterials(orderId){
+ let o=db.orders.find(x=>x.id===orderId);
+ if(!o||!canAdmin()||o.status!=="Sent to Branch")return;
+ ensureStock();
+ let items=findBomForProduct(o.product);
+ if(!items.length){
+   const names=[...new Set((db.bom||[]).map(b=>String(b.product||"").trim()).filter(Boolean))];
+   alert("No BOM found for: "+String(o.product||"").trim()+"\n\nBOM products saved:\n"+(names.length?names.join("\n"):"No BOM records"));
+   return;
+ }
+ for(let b of items){
+   let need=num(b.qty)*num(o.qty);
+   let x=db.stock.raw[rawKey(b.material,b.unit)];
+   if(!x||x.qty<need){
+     alert("Not enough Head Office stock for: "+b.material+". Required: "+need+" "+b.unit);
+     return;
+   }
+ }
+ for(let b of items){
+   issueMaterial(o.branchId,b.material,num(b.qty)*num(o.qty),b.unit,o.id,"For production");
+ }
+ o.materialIssued=true;
+ saveDB();
+ refreshAll();
+ toast("Materials issued to "+branchName(o.branchId));
+}
+function consumeBranchMaterials(o){
+ let items=findBomForProduct(o.product);if(!items.length)return false;
+ for(let b of items){let need=b.qty*o.qty,k=bsKey(o.branchId,b.material,b.unit),x=db.bs[k];if(!x||x.qty<need)return false}
+ for(let b of items)takeBranchStock(o.branchId,b.material,b.qty*o.qty,b.unit,o.id);
+ return true
+}
+
+/* ==================== REBUILD (FIXED + FG) ==================== */
+function rebuildStockFromPurchases(){
+ ensureStock();
+ const REBUILT=["Purchase","Material Issued to Branch","Material Returned","Branch Production Consumption"];
+ const others=(db.movements||[]).filter(m=>!REBUILT.includes(m.type));
+ const rebuilt=[];
+
+ db.stock.raw={};
+ db.bs={};
+
+ for(const p of db.purchases){
+   const q=num(p.qty), price=num(p.price), k=rawKey(p.material,p.unit);
+   const x=db.stock.raw[k]||{name:p.material,unit:p.unit,qty:0,value:0,avgPrice:0};
+   x.qty+=q; x.value+=q*price; x.avgPrice=x.qty?x.value/x.qty:0;
+   db.stock.raw[k]=x;
+   rebuilt.push({date:p.date||today(),type:"Purchase",item:p.material,qty:q,unit:p.unit,reference:p.id,branch:"Head Office"});
+ }
+
+ for(const x of (db.issues||[])){
+   const q=num(x.qty), k=rawKey(x.material,x.unit), r=db.stock.raw[k];
+   if(r){ r.qty-=q; r.value=Math.max(0,r.value-q*r.avgPrice); r.avgPrice=r.qty?r.value/r.qty:0; }
+   const bk=bsKey(x.branch,x.material,x.unit);
+   const b=db.bs[bk]||{branch:x.branch,name:x.material,unit:x.unit,qty:0,price:num(x.price)};
+   b.qty+=q; if(x.price!=null) b.price=num(x.price);
+   db.bs[bk]=b;
+   rebuilt.push({date:x.date,type:"Material Issued to Branch",item:x.material,qty:-q,unit:x.unit,reference:x.ref,branch:x.branch});
+ }
+
+ for(const m of (db.movements||[]).filter(m=>m.type==="Branch Production Consumption")){
+   const q=Math.abs(num(m.qty));
+   const b=db.bs[bsKey(m.branch,m.item,m.unit)];
+   if(b) b.qty=Math.max(0,b.qty-q);
+   rebuilt.push(m);
+ }
+
+ const seenReturns=new Set();
+ for(const m of (db.movements||[]).filter(m=>m.type==="Material Returned")){
+   const sig=[m.branch,m.item,m.unit,m.qty,m.reference,m.date].join("|");
+   if(seenReturns.has(sig)) continue;
+   seenReturns.add(sig);
+
+   const q=Math.abs(num(m.qty));
+   const b=db.bs[bsKey(m.branch,m.item,m.unit)];
+   let price=0;
+   if(b){ price=num(b.price); b.qty=Math.max(0,b.qty-q); }
+
+   const k=rawKey(m.item,m.unit);
+   const r=db.stock.raw[k]||{name:m.item,unit:m.unit,qty:0,value:0,avgPrice:0};
+   r.qty+=q; r.value+=q*price; r.avgPrice=r.qty?r.value/r.qty:0;
+   db.stock.raw[k]=r;
+
+   rebuilt.push(m);
+ }
+
+ for(const m of others.filter(m=>m.type==="Production Consumption")){
+   const q=Math.abs(num(m.qty)), r=db.stock.raw[rawKey(m.item,m.unit)];
+   if(r){ r.qty=Math.max(0,r.qty-q); r.value=Math.max(0,r.value-q*r.avgPrice); r.avgPrice=r.qty?r.value/r.qty:0; }
+ }
+
+ db.movements=others.concat(rebuilt);
+ db.movements.sort((a,b)=>String(a.date||"").localeCompare(String(b.date||"")));
+
+ db.stock.fg={};
+ const FG_TYPES=["Finished Goods Received","Sale","Sale Reversed","Sale Adjusted"];
+ for(const m of (db.movements||[]).filter(m=>FG_TYPES.includes(m.type))){
+   const k=String(m.item||"").trim().toLowerCase();
+   if(!k) continue;
+   const x=db.stock.fg[k]||{product:m.item,qty:0};
+   x.qty=Math.max(0, x.qty + num(m.qty));
+   db.stock.fg[k]=x;
+ }
+}
+
+function manualRebuildStock(){
+ if(!confirm("This recalculates all Head Office and Branch stock from purchases, issues, returns and production movements.\n\nContinue?"))return;
+ rebuildStockFromPurchases();saveDB();refreshAll();toast("Stock ledger rebuilt");
+}
+
+/* ============ INVENTORY ============ */
+function renderInventory(){
+ ensureStock();
+ let raw=Object.values(db.stock.raw),fg=Object.values(db.stock.fg);
+ let rv=raw.reduce((s,x)=>s+x.qty*x.avgPrice,0),rq=raw.reduce((s,x)=>s+x.qty,0),fq=fg.reduce((s,x)=>s+x.qty,0);
+ document.getElementById("inventoryCards").innerHTML=[
+   ["Raw Materials",raw.length],["Raw Qty",rq.toLocaleString()],
+   ["Raw Stock Value",money(rv)],["Finished Goods",fq.toLocaleString()+" pcs"]
+ ].map(x=>`<div class="card"><div class="muted">${x[0]}</div><div class="metric">${x[1]}</div></div>`).join("");
+
+ document.getElementById("rawStockTable").innerHTML=raw.length?raw.map(x=>{
+   let st=x.qty<=0?"Out of Stock":x.qty<5?"Low Stock":"OK";
+   let cl=x.qty<=0?"cancelled":x.qty<5?"pending":"finished";
+   return `<tr><td>${esc(x.name)}</td><td>${x.qty}</td><td>${esc(x.unit)}</td><td>${money(x.avgPrice)}</td><td>${money(x.qty*x.avgPrice)}</td><td><span class="badge ${cl}">${st}</span></td></tr>`
+ }).join(""):`<tr><td colspan="6">No raw material stock.</td></tr>`;
+
+ document.getElementById("fgStockTable").innerHTML=fg.length?fg.map(x=>`<tr><td>${esc(x.product)}</td><td>${x.qty}</td><td><span class="badge ${x.qty>0?"finished":"cancelled"}">${x.qty>0?"Available":"Out"}</span></td></tr>`).join(""):`<tr><td colspan="3">No finished goods.</td></tr>`;
+
+ let mv=[...(db.movements||[])].reverse().slice(0,300);
+ document.getElementById("stockMovementTable").innerHTML=mv.length?mv.map(m=>`<tr><td>${m.date}</td><td>${esc(m.type)}</td><td>${esc(m.item)}</td><td class="${m.qty<0?'kpi-red':'kpi-green'}"><b>${m.qty}</b></td><td>${esc(m.unit)}</td><td>${esc(m.reference)}</td><td>${esc(m.branch)}</td></tr>`).join(""):`<tr><td colspan="7">No stock movements.</td></tr>`
+}
+
+/* ============ PRODUCTION ============ */
+function productionCost(o){
+ let items=findBomForProduct(o.product);
+ let mat=items.reduce((s,b)=>s+b.qty*b.price*o.qty,0);
+ let lab=items.reduce((s,b)=>s+b.labour*o.qty,0);
+ return {mat,lab,total:mat+lab}
+}
+function renderProduction(){
+ let rows=visibleOrders();
+ document.getElementById("productionTable").innerHTML=rows.length?rows.map(o=>{
+   let c=productionCost(o);
+   return `<tr><td>${o.id}</td><td>${esc(o.product)}</td><td>${branchName(o.branchId)}</td><td>${o.qty}</td><td>${money(c.mat)}</td><td>${money(c.lab)}</td><td>${money(c.total)}</td><td>${statusBadge(o.status)}</td></tr>`
+ }).join(""):`<tr><td colspan="8">No production orders.</td></tr>`
+}
+
+/* ============ MATERIAL ISSUE ============ */
+function normalizeBOMRecords(){
+ db.bom=(db.bom||[]).map(b=>({...b,
+   product:String(b.product||"").trim().replace(/\s+/g," "),
+   material:String(b.material||"").trim().replace(/\s+/g," "),
+   unit:String(b.unit||"").trim()
+ }));
+ saveDB(); refreshAll(); toast("BOM names fixed");
+}
+function renderIssue(){
+ let rows=canAdmin()?db.orders.filter(o=>o.status==="Sent to Branch"&&!o.materialIssued):[];
+ let el=document.getElementById("issueOrderTable");
+ if(el)el.innerHTML=rows.length?rows.map(o=>`<tr><td>${esc(o.id)}</td><td>${esc(o.product)}</td><td>${branchName(o.branchId)}</td><td>${o.qty}</td><td>${statusBadge(o.status)}</td><td><button class="warn" onclick="issueOrderMaterials('${o.id}')">Issue Material</button></td></tr>`).join(""):`<tr><td colspan="6">No orders waiting for material.</td></tr>`;
+
+ let hist=(db.issues||[]).slice().reverse(),it=document.getElementById("issueTable");
+ if(it)it.innerHTML=hist.length?hist.map(x=>`<tr><td>${x.date}</td><td>${esc(branchName(x.branch))}</td><td>${esc(x.material)}</td><td>${x.qty}</td><td>${esc(x.unit)}</td><td>${esc(x.ref)}</td><td>${esc(x.note)}</td></tr>`).join(""):`<tr><td colspan="7">No material issues yet.</td></tr>`;
+}
+function renderBranchStock(){
+ ensureBranchStock();
+ let sel=document.getElementById("stockBranch");if(!sel)return;
+ let chosen=canAdmin()?(sel.value||db.branches[0]?.id):(session?.branchId||db.branches[0]?.id);
+ sel.innerHTML=db.branches.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join("");
+ sel.value=chosen;sel.disabled=!canAdmin();
+ let rows=Object.values(db.bs).filter(x=>x.branch===chosen),el=document.getElementById("branchStockTable");
+ el.innerHTML=rows.length?rows.map(x=>`<tr><td>${esc(x.name)}</td><td>${x.qty}</td><td>${esc(x.unit)}</td><td>${money(x.price)}</td><td>${money(x.qty*x.price)}</td><td>${x.qty>0?`<button class="warn" onclick="returnBranchMaterial('${encodeURIComponent(chosen)}','${encodeURIComponent(x.name)}','${encodeURIComponent(x.unit)}')">Return</button>`:"—"}</td></tr>`).join(""):`<tr><td colspan="6">No material at this branch.</td></tr>`;
+}
+function returnBranchMaterial(b,n,u){
+ b=decodeURIComponent(b);n=decodeURIComponent(n);u=decodeURIComponent(u);
+ if(!canAdmin()&&session?.branchId!==b)return;
+ let k=bsKey(b,n,u),x=db.bs[k];
+ if(!x||x.qty<=0)return;
+ let q=num(prompt("Quantity to return. Available: "+x.qty));
+ if(q<=0||q>x.qty)return;
+ if(returnMaterial(b,n,q,u,id("RET"))){saveDB();refreshAll();toast("Material returned to Head Office")}
+}
+
+/* ============ BOM ============ */
+function saveBom(){
+ let product=document.getElementById("bProduct").value.trim(),material=document.getElementById("bMaterial").value.trim();
+ if(!product||!material){alert("Enter product and material");return}
+ let eid=document.getElementById("editBomId").value;
+ product=product.trim().replace(/\s+/g," "); material=material.trim().replace(/\s+/g," ");
+ let data={product,material,qty:num(document.getElementById("bQty").value),unit:document.getElementById("bUnit").value.trim(),price:num(document.getElementById("bPrice").value),labour:num(document.getElementById("bLabour").value)};
+ if(eid)Object.assign(db.bom.find(x=>x.id===eid),data);else db.bom.push({id:id("BOM"),...data});
+ saveDB();clearBomForm();refreshAll();toast("BOM saved")
+}
+function clearBomForm(){["bProduct","bMaterial","bUnit","editBomId"].forEach(x=>document.getElementById(x).value="");["bQty","bPrice","bLabour"].forEach(x=>document.getElementById(x).value=0)}
+function editBom(i){
+ let b=db.bom.find(x=>x.id===i);if(!b)return;
+ document.getElementById("bProduct").value=b.product;document.getElementById("bMaterial").value=b.material;
+ document.getElementById("bQty").value=b.qty;document.getElementById("bUnit").value=b.unit;
+ document.getElementById("bPrice").value=b.price;document.getElementById("bLabour").value=b.labour;
+ document.getElementById("editBomId").value=i;showPage("bom");scrollTo(0,0)
+}
+function delBom(i){if(confirm("Delete BOM line?")){db.bom=db.bom.filter(x=>x.id!==i);saveDB();refreshAll()}}
+function renderBom(){
+ document.getElementById("bomTable").innerHTML=db.bom.length?db.bom.map(b=>`<tr><td>${esc(b.product)}</td><td>${esc(b.material)}</td><td>${b.qty}</td><td>${esc(b.unit)}</td><td>${money(b.price)}</td><td>${money(b.qty*b.price)}</td><td>${money(b.labour)}</td><td><button class="btn2" onclick="editBom('${b.id}')">Edit</button> <button class="danger" onclick="delBom('${b.id}')">Delete</button></td></tr>`).join(""):`<tr><td colspan="8">No BOM lines.</td></tr>`
+}
+
+/* ============ PURCHASES ============ */
+function savePurchase(){
+ let data={date:document.getElementById("pDate").value,supplier:document.getElementById("pSupplier").value,material:document.getElementById("pMaterial").value,qty:num(document.getElementById("pQty").value),unit:document.getElementById("pUnit").value,price:num(document.getElementById("pPrice").value),payment:document.getElementById("pPay").value};
+ if(!data.material||data.qty<=0){alert("Enter material and quantity");return}
+ let eid=document.getElementById("editPurchaseId").value;
+ if(eid){
+   const p=db.purchases.find(x=>x.id===eid);
+   if(!p){alert("Purchase not found");return}
+   Object.assign(p,data);
+   rebuildStockFromPurchases();
+ }else{
+   let np={id:id("PUR"),...data};
+   db.purchases.push(np);
+   addRawStock(np.material,np.qty,np.unit,np.price,np.id,"Purchase","Head Office");
+ }
+ saveDB();clearPurchaseForm();refreshAll();toast("Purchase saved")
+}
+function clearPurchaseForm(){["pSupplier","pMaterial","pUnit","editPurchaseId"].forEach(x=>document.getElementById(x).value="");document.getElementById("pQty").value=0;document.getElementById("pPrice").value=0;document.getElementById("pDate").value=today()}
+function editPurchase(i){
+ let p=db.purchases.find(x=>x.id===i);if(!p)return;
+ document.getElementById("pDate").value=p.date;document.getElementById("pSupplier").value=p.supplier;
+ document.getElementById("pMaterial").value=p.material;document.getElementById("pQty").value=p.qty;
+ document.getElementById("pUnit").value=p.unit;document.getElementById("pPrice").value=p.price;
+ document.getElementById("pPay").value=p.payment;document.getElementById("editPurchaseId").value=i;
+ showPage("purchases")
+}
+function delPurchase(i){
+ if(!confirm("Delete purchase?"))return;
+ db.purchases=db.purchases.filter(x=>x.id!==i);
+ rebuildStockFromPurchases();saveDB();refreshAll();toast("Purchase deleted")
+}
+function renderPurchases(){
+ let rows=visiblePurchases();
+ document.getElementById("purchaseTable").innerHTML=rows.length?rows.map(p=>`<tr><td>${p.date}</td><td>${esc(p.supplier)}</td><td>${esc(p.material)}</td><td>${p.qty}</td><td>${esc(p.unit)}</td><td>${money(p.price)}</td><td>${money(p.qty*p.price)}</td><td>${p.payment}</td><td><button class="btn2" onclick="editPurchase('${p.id}')">Edit</button> <button class="danger" onclick="delPurchase('${p.id}')">Delete</button></td></tr>`).join(""):`<tr><td colspan="9">No purchases.</td></tr>`
+}
+
+/* ============ SALES ============ */
+function saveSale(){
+ let data={date:document.getElementById("sDate").value,customer:document.getElementById("sCustomer").value,product:document.getElementById("sProduct").value,qty:num(document.getElementById("sQty").value),price:num(document.getElementById("sPrice").value),payment:document.getElementById("sPay").value};
+ if(!data.product||data.qty<=0){alert("Enter product and quantity");return}
+
+ let eid=document.getElementById("editSaleId").value;
+ ensureStock();
+
+ if(eid){
+   const s=db.sales.find(x=>x.id===eid);
+   if(!s){alert("Sale not found");return}
+   const oldKey=s.product.trim().toLowerCase();
+   const newKey=data.product.trim().toLowerCase();
+
+   if(oldKey===newKey){
+     const delta=num(data.qty)-num(s.qty);
+     if(delta>0 && !consumeFG(data.product,delta,"Sale Edit")){
+       alert("Not enough finished goods stock for this increase.");return;
+     }
+     if(delta<0){
+       const fg=db.stock.fg[newKey];
+       if(fg){
+         fg.qty+=Math.abs(delta);
+         db.movements.push({date:today(),type:"Sale Adjusted",item:data.product,qty:Math.abs(delta),unit:"pcs",reference:s.id,branch:"Head Office"});
+       }
+     }
+   }else{
+     const fgNew=db.stock.fg[newKey];
+     if(!fgNew||fgNew.qty<num(data.qty)){
+       alert("Not enough finished goods stock for "+data.product);return;
+     }
+     const fgOld=db.stock.fg[oldKey];
+     if(fgOld) fgOld.qty+=num(s.qty);
+     db.movements.push({date:today(),type:"Sale Reversed",item:s.product,qty:num(s.qty),unit:"pcs",reference:s.id,branch:"Head Office"});
+     consumeFG(data.product,num(data.qty),"Sale Edit");
+   }
+   Object.assign(s,data);
+ }else{
+   if(!consumeFG(data.product,data.qty,"Manual Sale")){alert("Not enough finished goods stock for this sale.");return}
+   db.sales.push({id:id("SAL"),...data});
+ }
+ saveDB();clearSaleForm();refreshAll();toast("Sale saved")
+}
+function clearSaleForm(){["sCustomer","sProduct","editSaleId"].forEach(x=>document.getElementById(x).value="");document.getElementById("sQty").value=1;document.getElementById("sPrice").value=0;document.getElementById("sDate").value=today()}
+function editSale(i){
+ let s=db.sales.find(x=>x.id===i);if(!s)return;
+ document.getElementById("sDate").value=s.date;document.getElementById("sCustomer").value=s.customer;
+ document.getElementById("sProduct").value=s.product;document.getElementById("sQty").value=s.qty;
+ document.getElementById("sPrice").value=s.price;document.getElementById("sPay").value=s.payment;
+ document.getElementById("editSaleId").value=i;showPage("sales")
+}
+function delSale(i){
+ const s=db.sales.find(x=>x.id===i);
+ if(!s||!confirm("Delete sale? Finished goods will be returned to stock."))return;
+
+ db.sales=db.sales.filter(x=>x.id!==i);
+
+ ensureStock();
+ const fg=db.stock.fg[s.product.trim().toLowerCase()];
+ if(fg) fg.qty+=num(s.qty);
+ db.movements.push({date:today(),type:"Sale Reversed",item:s.product,qty:num(s.qty),unit:"pcs",reference:s.id,branch:"Head Office"});
+
+ if(s.orderId){
+   const o=db.orders.find(x=>x.id===s.orderId);
+   if(o&&o.status==="Completed") o.status="Finished Goods Received";
+ }
+ saveDB();refreshAll();toast("Sale deleted, stock restored")
+}
+function renderSales(){
+ let rows=visibleSales();
+ document.getElementById("salesTable").innerHTML=rows.length?rows.map(s=>`<tr><td>${s.date}</td><td>${esc(s.customer)}</td><td>${esc(s.product)}</td><td>${s.qty}</td><td>${money(s.price)}</td><td>${money(s.qty*s.price)}</td><td>${s.payment}</td><td><button class="btn2" onclick="editSale('${s.id}')">Edit</button> <button class="danger" onclick="delSale('${s.id}')">Delete</button></td></tr>`).join(""):`<tr><td colspan="8">No sales.</td></tr>`
+}
+
+/* ============ FINANCE / REPORTS ============ */
+function totals(){
+ const active=db.orders.filter(o=>o.status!=="Cancelled");
+ const sales=db.sales.reduce((s,x)=>s+x.qty*x.price,0);
+ const purchase=db.purchases.reduce((s,x)=>s+x.qty*x.price,0);
+ const completedOrders=db.orders.filter(o=>o.status==="Completed");
+ const cogsMaterial=completedOrders.reduce((s,o)=>s+productionCost(o).mat,0);
+ const labour=active.reduce((s,o)=>s+productionCost(o).lab,0);
+ const cogs=cogsMaterial+labour;
+ const closingStock=Object.values(db.stock.raw||{}).reduce((s,x)=>s+x.qty*x.avgPrice,0);
+ return { sales, purchase, cogs, labour, closingStock, profit:sales-cogs, production:cogs };
+}
+function renderFinance(){
+ if(!canAdmin()){
+   document.getElementById("financeCards").innerHTML="<div class='card'>Finance is available only to Head Office.</div>";
+   document.getElementById("financeSummary").innerHTML="";return
+ }
+ let t=totals();
+ document.getElementById("financeCards").innerHTML=[
+ ["Sales",money(t.sales),"kpi-green"],["Purchases (cash out)",money(t.purchase),"kpi-red"],
+ ["Cost of Goods Sold",money(t.cogs),"kpi-red"],["Estimated Profit",money(t.profit),t.profit>=0?"kpi-green":"kpi-red"]
+ ].map(x=>`<div class="card"><div class="muted">${x[0]}</div><div class="metric ${x[2]}">${x[1]}</div></div>`).join("");
+ document.getElementById("financeSummary").innerHTML=
+ `<p><b>Sales Revenue:</b> ${money(t.sales)}</p>
+  <p><b>Purchases (cash out):</b> ${money(t.purchase)}</p>
+  <p><b>Material in completed orders:</b> ${money(t.cogs-t.labour)}</p>
+  <p><b>Labour:</b> ${money(t.labour)}</p>
+  <p><b>Cost of Goods Sold:</b> ${money(t.cogs)}</p>
+  <p><b>Closing Raw Stock Value:</b> ${money(t.closingStock)}</p><hr>
+  <p><b>Estimated Profit / Loss:</b> <span class="${t.profit>=0?'kpi-green':'kpi-red'}">${money(t.profit)}</span></p>
+  <p class="muted">Profit = Sales − (material used in completed orders + labour). For full double-entry accounting, open the <b>Accounting</b> page in the sidebar.</p>`
+}
+function renderDashboard(){
+ let os=visibleOrders(),units=os.reduce((s,o)=>s+o.qty,0),
+     completed=os.filter(o=>o.status==="Completed").length,
+     inprod=os.filter(o=>["In Production","Assembly Complete"].includes(o.status)).length;
+ let cards=[["Orders",os.length],["Units",units],["In Production",inprod],["Completed",completed]];
+ document.getElementById("dashCards").innerHTML=cards.map(x=>`<div class="card"><div class="muted">${x[0]}</div><div class="metric">${x[1]}</div></div>`).join("");
+ let data=db.branches.map(b=>({b,n:visibleOrders().filter(o=>o.branchId===b.id).reduce((s,o)=>s+o.qty,0)}));
+ let max=Math.max(1,...data.map(x=>x.n));
+ document.getElementById("branchChart").innerHTML=data.map(x=>`<div style="margin:8px 0"><div>${x.b.name}: <b>${x.n} units</b></div><div class="chartbar"><div style="width:${Math.max(2,x.n/max*100)}%">${x.n}</div></div></div>`).join("");
+ document.getElementById("recentOrders").innerHTML=os.slice(-6).reverse().map(o=>`<div style="padding:8px 0;border-bottom:1px solid #eee"><b>${esc(o.product)}</b> × ${o.qty}<br>${esc(o.customer)} • ${statusBadge(o.status)}</div>`).join("")||"No orders"
+}
+function renderReports(){
+ if(!canAdmin()){document.getElementById("reportCards").innerHTML="<div class='card'>Reports are available only to Head Office.</div>";return}
+ let t=totals(),completed=db.orders.filter(o=>o.status==="Completed").length;
+ document.getElementById("reportCards").innerHTML=[["Revenue",money(t.sales)],["Estimated Profit",money(t.profit)],["Total Orders",db.orders.length],["Completed",completed]].map(x=>`<div class="card"><div class="muted">${x[0]}</div><div class="metric">${x[1]}</div></div>`).join("");
+ let totalUnits=Math.max(1,db.orders.reduce((s,o)=>s+o.qty,0));
+ document.getElementById("reportBranches").innerHTML=db.branches.map(b=>{let u=db.orders.filter(o=>o.branchId===b.id).reduce((s,o)=>s+o.qty,0);return `<p>${b.name}: <b>${u}</b> units (${Math.round(u/totalUnits*100)}%)</p>`}).join("");
+ let statuses={};db.orders.forEach(o=>statuses[o.status]=(statuses[o.status]||0)+1);
+ document.getElementById("reportStatus").innerHTML=Object.entries(statuses).map(([s,n])=>`<p>${statusBadge(s)} &nbsp; <b>${n}</b></p>`).join("")||"No data";
+ document.getElementById("branchReportTable").innerHTML=db.branches.map(b=>{
+   let os=db.orders.filter(o=>o.branchId===b.id),u=os.reduce((s,o)=>s+o.qty,0),
+       sv=os.reduce((s,o)=>s+o.qty*o.price,0),pc=os.reduce((s,o)=>s+productionCost(o).total,0);
+   return `<tr><td>${b.name}</td><td>${os.length}</td><td>${u}</td><td>${money(sv)}</td><td>${money(pc)}</td></tr>`
+ }).join("")
+}
+function renderBranches(){
+ document.getElementById("branchTable").innerHTML=db.branches.map(b=>`<tr><td>${b.name}</td><td>${b.user}</td><td>••••••</td><td>Production access</td></tr>`).join("")
+}
+
+/* ============ BACKUP ============ */
+function backup(){
+ let blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"}),a=document.createElement("a");
+ a.href=URL.createObjectURL(blob);a.download="handmade_decor_erp_v6_backup.json";a.click();URL.revokeObjectURL(a.href)
+}
+function restore(e){
+ let f=e.target.files[0];if(!f)return;
+ let r=new FileReader();
+ r.onload=async ()=>{
+   try{
+     let x=JSON.parse(r.result);
+     if(!x.orders||!x.branches)throw 0;
+     db=x;ensureStock();db.issues??=[];db.bs??={};
+     for(const b of db.branches||[]){
+       if(b.pass && !b.passHash){ b.passHash=await sha256(b.pass); delete b.pass; }
+     }
+     if(!db.adminHash) db.adminHash=await sha256("admin123");
+     rebuildStockFromPurchases();
+     if(window.ensureAcct) ensureAcct();
+     saveDB();buildNav();initDates();refreshAll();
+     alert("Backup restored successfully")
+   }catch(err){alert("Invalid backup file")}
+ };
+ r.readAsText(f)
+}
+function resetData(){
+ if(!confirm("This will delete ALL ERP data. Continue?"))return;
+ db={orders:[],bom:[],purchases:[],sales:[],stock:{raw:{},fg:{}},movements:[],issues:[],bs:{},
+     accounts:[],journal:[],payments:[],opening:{date:"",cash:0,bank:0,raw:0,fg:0,recv:0,pay:0},
+     branches:[
+  {id:"B1",name:"Branch 1",user:"branch1",pass:"branch123"},{id:"B2",name:"Branch 2",user:"branch2",pass:"branch123"},
+  {id:"B3",name:"Branch 3",user:"branch3",pass:"branch123"},{id:"B4",name:"Branch 4",user:"branch4",pass:"branch123"},
+  {id:"B5",name:"Branch 5",user:"branch5",pass:"branch123"}]};
+ saveDB();
+ migratePasswords().then(()=>{refreshAll();toast("All data reset")});
+}
+
+/* ============ V6 SAFETY / AUDIT ============ */
+(function(){
+  const V6_KEY="HD_ERP_V6_LEDGER";
+  function v6Load(){try{return JSON.parse(localStorage.getItem(V6_KEY)||'{"moves":[]}')}catch(e){return {moves:[]}}}
+  function v6Save(x){localStorage.setItem(V6_KEY,JSON.stringify(x))}
+
+  window.v6Ledger={
+    add:function(m){const x=v6Load();x.moves.push(Object.assign({id:Date.now()+Math.random(),date:new Date().toISOString()},m));v6Save(x)},
+    all:function(){return v6Load().moves},
+    clear:function(){localStorage.removeItem(V6_KEY)}
+  };
+
+  window.v6StockAudit=function(){
+    const d=(typeof db!=="undefined"&&db)?db:null;
+    if(!d||!Array.isArray(d.orders))return {ok:false,message:"ERP data not loaded."};
+    return {
+      ok:true, checked:new Date().toISOString(),
+      purchases:(d.purchases||[]).length, orders:d.orders.length,
+      sales:(d.sales||[]).length, bom:(d.bom||[]).length,
+      issues:(d.issues||[]).length, branches:(d.branches||[]).length
+    };
+  };
+
+  window.v6BackupV4=function(){
+    const candidates=["HD_ERP_INVENTORY_V4","HD_ERP_COMPLETE_V4","HD_ERP_COMPLETE_V3"];
+    for(const k of candidates){
+      const val=localStorage.getItem(k);
+      if(val){
+        const backupKey=k+"_V6_BACKUP_"+new Date().toISOString().replace(/[:.]/g,"-");
+        localStorage.setItem(backupKey,val);
+        return {ok:true,key:k,backupKey:backupKey};
+      }
+    }
+    return {ok:false,message:"No known V4 database key found."};
+  };
+
+  migratePasswords();
+})();
+</script>
+
+<!-- ============================================================ -->
+<!-- ==================== ACCOUNTING MODULE ===================== -->
+<!-- ============================================================ -->
+<script>
+(function(){
+  const DEFAULT_ACCOUNTS = [
+    {code:"1000", name:"Cash in Hand",             type:"asset"},
+    {code:"1010", name:"Bank",                     type:"asset"},
+    {code:"1100", name:"Accounts Receivable",      type:"asset",     party:"customer"},
+    {code:"1200", name:"Raw Materials Inventory",  type:"asset"},
+    {code:"1210", name:"Finished Goods Inventory", type:"asset"},
+    {code:"1220", name:"Branch Stock",             type:"asset"},
+    {code:"1230", name:"Work in Progress",         type:"asset"},
+    {code:"2000", name:"Accounts Payable",         type:"liability", party:"supplier"},
+    {code:"2100", name:"Labour Payable",           type:"liability"},
+    {code:"3000", name:"Owner's Equity",           type:"equity"},
+    {code:"3100", name:"Retained Earnings",        type:"equity"},
+    {code:"4000", name:"Sales Revenue",            type:"income"},
+    {code:"5000", name:"Cost of Goods Sold",       type:"expense"},
+    {code:"5100", name:"Labour Cost",              type:"expense"}
+  ];
+
+  window.ensureAcct=function(){
+    db.accounts  = db.accounts || DEFAULT_ACCOUNTS.map(a=>({...a}));
+    for(const d of DEFAULT_ACCOUNTS){
+      if(!db.accounts.find(a=>a.code===d.code)) db.accounts.push({...d});
+    }
+    db.journal   = db.journal   || [];
+    db.payments  = db.payments  || [];
+    db.opening   = db.opening   || {date:"", cash:0, bank:0, raw:0, fg:0, recv:0, pay:0};
+  };
+  function acctName(code){const a=db.accounts.find(x=>x.code===code);return a?a.name:code}
+  function acctType(code){const a=db.accounts.find(x=>x.code===code);return a?a.type:"asset"}
+  function isDebitNormal(code){const t=acctType(code);return t==="asset"||t==="expense"}
+
+  function postJE(date, ref, narration, lines){
+    const clean = lines.filter(l=>num(l.debit)>0 || num(l.credit)>0);
+    if(!clean.length) return;
+    const dr = clean.reduce((s,l)=>s+num(l.debit),0);
+    const cr = clean.reduce((s,l)=>s+num(l.credit),0);
+    if(Math.abs(dr-cr) > 0.01){ console.warn("Unbalanced JE skipped:", ref, dr, cr, clean); return; }
+    db.journal.push({id:"JE"+(db.journal.length+1).toString().padStart(5,"0"), date, ref, narration, lines:clean});
+  }
+
+  function avgRawPrice(material, unit){
+    const matches = (db.purchases||[]).filter(p=>
+      String(p.material||"").trim().toLowerCase()===String(material||"").trim().toLowerCase() &&
+      String(p.unit||"").trim().toLowerCase()===String(unit||"").trim().toLowerCase()
+    );
+    let q=0,v=0;
+    for(const p of matches){ q+=num(p.qty); v+=num(p.qty)*num(p.price); }
+    return q>0 ? v/q : 0;
+  }
+  function bomMatCost(product, qty){
+    return findBomForProduct(product).reduce((s,b)=>{
+      const p = num(b.price) || avgRawPrice(b.material, b.unit);
+      return s + num(b.qty)*p*num(qty);
+    },0);
+  }
+  function bomLabCost(product, qty){
+    return findBomForProduct(product).reduce((s,b)=>s+num(b.labour)*num(qty),0);
+  }
+
+  window.rebuildAccounting=function(){
+    ensureAcct();
+    db.journal = [];
+
+    const op = db.opening||{};
+    if(op.date){
+      const L=[];
+      if(num(op.cash)) L.push({account:"1000",debit:num(op.cash),credit:0});
+      if(num(op.bank)) L.push({account:"1010",debit:num(op.bank),credit:0});
+      if(num(op.raw))  L.push({account:"1200",debit:num(op.raw),credit:0});
+      if(num(op.fg))   L.push({account:"1210",debit:num(op.fg),credit:0});
+      if(num(op.recv)) L.push({account:"1100",debit:num(op.recv),credit:0});
+      if(num(op.pay))  L.push({account:"2000",debit:0,credit:num(op.pay)});
+      const assets = num(op.cash)+num(op.bank)+num(op.raw)+num(op.fg)+num(op.recv);
+      const eq = assets - num(op.pay);
+      if(eq>=0) L.push({account:"3000",debit:0,credit:eq});
+      else      L.push({account:"3000",debit:-eq,credit:0});
+      postJE(op.date,"OPENING","Opening balances",L);
+    }
+
+    for(const p of (db.purchases||[])){
+      const amt=num(p.qty)*num(p.price);
+      if(amt<=0) continue;
+      const L=[{account:"1200",debit:amt,credit:0}];
+      if(p.payment==="Credit")      L.push({account:"2000",debit:0,credit:amt,party:p.supplier});
+      else if(p.payment==="Bank")   L.push({account:"1010",debit:0,credit:amt});
+      else                          L.push({account:"1000",debit:0,credit:amt});
+      postJE(p.date||today(),p.id,"Purchase: "+(p.material||"")+" — "+(p.supplier||""),L);
+    }
+
+    for(const x of (db.issues||[])){
+      const amt = num(x.qty)*num(x.price);
+      if(amt<=0) continue;
+      postJE(x.date,x.id,"Material issued to "+branchName(x.branch)+": "+x.material,[
+        {account:"1220",debit:amt,credit:0},
+        {account:"1200",debit:0,credit:amt}
+      ]);
+    }
+
+    const seen=new Set();
+    for(const m of (db.movements||[]).filter(m=>m.type==="Material Returned")){
+      const sig=[m.branch,m.item,m.unit,m.qty,m.reference,m.date].join("|");
+      if(seen.has(sig)) continue;
+      seen.add(sig);
+      const q=Math.abs(num(m.qty));
+      const price=avgRawPrice(m.item,m.unit);
+      const amt=q*price;
+      if(amt<=0) continue;
+      postJE(m.date,m.reference||"RET","Material returned from "+branchName(m.branch)+": "+m.item,[
+        {account:"1200",debit:amt,credit:0},
+        {account:"1220",debit:0,credit:amt}
+      ]);
+    }
+
+    for(const m of (db.movements||[]).filter(m=>m.type==="Branch Production Consumption")){
+      const q=Math.abs(num(m.qty));
+      const price=avgRawPrice(m.item,m.unit);
+      const amt=q*price;
+      if(amt<=0) continue;
+      postJE(m.date,m.reference||"CONS","Consumed at "+branchName(m.branch)+": "+m.item,[
+        {account:"1230",debit:amt,credit:0},
+        {account:"1220",debit:0,credit:amt}
+      ]);
+    }
+
+    for(const m of (db.movements||[]).filter(m=>m.type==="Finished Goods Received")){
+      const qty=num(m.qty);
+      if(qty<=0) continue;
+      const mat=bomMatCost(m.item,qty);
+      const lab=bomLabCost(m.item,qty);
+      const total=mat+lab;
+      if(total>0){
+        postJE(m.date,m.reference||"FG","Finished goods received: "+m.item,[
+          {account:"1210",debit:total,credit:0},
+          {account:"1230",debit:0,credit:mat},
+          {account:"2100",debit:0,credit:lab}
+        ]);
+      }
+    }
+
+    for(const s of (db.sales||[])){
+      const amt=num(s.qty)*num(s.price);
+      if(amt<=0) continue;
+      const L=[];
+      if(s.payment==="Credit")     L.push({account:"1100",debit:amt,credit:0,party:s.customer});
+      else if(s.payment==="Bank")  L.push({account:"1010",debit:amt,credit:0});
+      else                         L.push({account:"1000",debit:amt,credit:0});
+      L.push({account:"4000",debit:0,credit:amt});
+      const cogs = bomMatCost(s.product,s.qty) + bomLabCost(s.product,s.qty);
+      if(cogs>0){
+        L.push({account:"5000",debit:cogs,credit:0});
+        L.push({account:"1210",debit:0,credit:cogs});
+      }
+      postJE(s.date,s.id,"Sale: "+s.product+" — "+(s.customer||""),L);
+    }
+
+    for(const p of (db.payments||[]).filter(x=>x.type==="received")){
+      const amt=num(p.amount); if(amt<=0) continue;
+      const cash = p.mode==="Bank" ? "1010" : "1000";
+      postJE(p.date,p.id,"Receipt from "+(p.party||""),[
+        {account:cash,debit:amt,credit:0},
+        {account:"1100",debit:0,credit:amt,party:p.party}
+      ]);
+    }
+    for(const p of (db.payments||[]).filter(x=>x.type==="paid")){
+      const amt=num(p.amount); if(amt<=0) continue;
+      const cash = p.mode==="Bank" ? "1010" : "1000";
+      postJE(p.date,p.id,"Payment to "+(p.party||""),[
+        {account:"2000",debit:amt,credit:0,party:p.party},
+        {account:cash,debit:0,credit:amt}
+      ]);
+    }
+    for(const p of (db.payments||[]).filter(x=>x.type==="labour")){
+      const amt=num(p.amount); if(amt<=0) continue;
+      const cash = p.mode==="Bank" ? "1010" : "1000";
+      postJE(p.date,p.id,"Labour paid to "+(p.party||"branch"),[
+        {account:"2100",debit:amt,credit:0},
+        {account:cash,debit:0,credit:amt}
+      ]);
+    }
+
+    db.journal.sort((a,b)=>String(a.date||"").localeCompare(String(b.date||"")));
+  };
+
+  window.acctSum=function(code){
+    let d=0,c=0;
+    for(const je of db.journal||[]) for(const l of je.lines||[])
+      if(l.account===code){ d+=num(l.debit); c+=num(l.credit); }
+    return {debit:d,credit:c,balance:d-c};
+  };
+  window.acctPartySum=function(code,party){
+    let d=0,c=0;
+    for(const je of db.journal||[]) for(const l of je.lines||[])
+      if(l.account===code && String(l.party||"").trim().toLowerCase()===String(party||"").trim().toLowerCase()){
+        d+=num(l.debit); c+=num(l.credit);
+      }
+    return {debit:d,credit:c,balance:d-c};
+  };
+
+  /* ---- inject pages ---- */
+  function injectPages(){
+    const main=document.querySelector("main.main");
+    if(!main || document.getElementById("accounting")) return;
+    main.insertAdjacentHTML("beforeend",`
+      <section id="accounting" class="page">
+        <h2>📚 Accounting</h2>
+        <div class="card">
+          <div class="actions" style="margin-bottom:10px">
+            <button class="btn" id="acctBtnCOA"   onclick="acctTab('coa')">Chart of Accounts</button>
+            <button class="btn2" id="acctBtnJour" onclick="acctTab('journal')">Journal</button>
+            <button class="btn2" id="acctBtnCust" onclick="acctTab('customers')">Customer Ledgers</button>
+            <button class="btn2" id="acctBtnSupp" onclick="acctTab('suppliers')">Supplier Ledgers</button>
+            <button class="btn2" id="acctBtnTrial" onclick="acctTab('trial')">Trial Balance</button>
+            <button class="btn2" id="acctBtnPL"   onclick="acctTab('pl')">P&L</button>
+            <button class="btn2" id="acctBtnBS"   onclick="acctTab('bs')">Balance Sheet</button>
+            <button class="btn2" id="acctBtnCSV"  onclick="acctTab('csv')">📤 CSV Exports</button>
+            <button class="warn" style="margin-left:auto" onclick="manualRebuildAccounting()">Rebuild Journals</button>
+          </div>
+          <div id="acctContent"></div>
+        </div>
+      </section>
+
+      <section id="payments" class="page">
+        <h2>💰 Payments</h2>
+        <div class="card">
+          <div class="section-title">Record Payment</div>
+          <div class="formgrid">
+            <div><label>Date</label><input id="payDate" type="date"></div>
+            <div><label>Type</label>
+              <select id="payType" onchange="renderPayParty()">
+                <option value="received">Received from Customer</option>
+                <option value="paid">Paid to Supplier</option>
+                <option value="labour">Labour Paid</option>
+              </select>
+            </div>
+            <div><label>Party</label><select id="payParty"></select></div>
+            <div><label>Amount</label><input id="payAmount" type="number" min="0" step="0.01" value="0"></div>
+            <div><label>Mode</label><select id="payMode"><option>Cash</option><option>Bank</option></select></div>
+            <div><label>Note</label><input id="payNote"></div>
+          </div>
+          <div class="actions" style="margin-top:10px">
+            <button class="btn" onclick="savePayment()">Save Payment</button>
+            <button class="btn2" onclick="clearPaymentForm()">Clear</button>
+          </div>
+          <input id="editPaymentId" type="hidden">
+        </div>
+        <div class="card" style="margin-top:15px">
+          <div class="section-title">Payment History</div>
+          <div class="tablewrap"><table>
+            <thead><tr><th>Date</th><th>Type</th><th>Party</th><th>Amount</th><th>Mode</th><th>Note</th><th>Actions</th></tr></thead>
+            <tbody id="paymentTable"></tbody></table></div>
+        </div>
+      </section>
+
+      <section id="opening" class="page">
+        <h2>⚙️ Opening Balances</h2>
+        <div class="notice">Enter the balances on the day you started using this ERP. Enter them <b>once</b>. They post as a single opening journal entry.</div>
+        <div class="card">
+          <div class="formgrid">
+            <div><label>Opening Date</label><input id="opDate" type="date"></div>
+            <div><label>Cash in Hand</label><input id="opCash" type="number" step="0.01" min="0"></div>
+            <div><label>Bank Balance</label><input id="opBank" type="number" step="0.01" min="0"></div>
+            <div><label>Raw Materials Value</label><input id="opRaw" type="number" step="0.01" min="0"></div>
+            <div><label>Finished Goods Value</label><input id="opFG" type="number" step="0.01" min="0"></div>
+            <div><label>Receivables (customers owe you)</label><input id="opRecv" type="number" step="0.01" min="0"></div>
+            <div><label>Payables (you owe suppliers)</label><input id="opPay" type="number" step="0.01" min="0"></div>
+          </div>
+          <div class="actions" style="margin-top:10px">
+            <button class="btn" onclick="saveOpening()">Save Opening Balances</button>
+          </div>
+        </div>
+      </section>
+    `);
+  }
+
+  /* ---- nav hook ---- */
+  const _origBuildNav = window.buildNav;
+  window.buildNav = function(){
+    _origBuildNav();
+    if(typeof canAdmin==="function" && canAdmin()){
+      const nav=document.getElementById("nav");
+      nav.insertAdjacentHTML("beforeend",
+        `<button onclick="showPage('accounting')">📚 Accounting</button>
+         <button onclick="showPage('payments')">💰 Payments</button>
+         <button onclick="showPage('opening')">⚙️ Opening Balances</button>`);
+    }
+  };
+
+  /* ---- refreshAll hook ---- */
+  const _origRefreshAll = window.refreshAll;
+  window.refreshAll = function(){
+    ensureAcct();
+    rebuildAccounting();
+    _origRefreshAll();
+    renderAccounting();
+    renderPayments();
+    renderOpening();
+  };
+
+  /* ---- accounting tabs ---- */
+  window._acctTab = "coa";
+  window.acctTab = function(t){
+    window._acctTab = t;
+    const map={coa:"acctBtnCOA",journal:"acctBtnJour",customers:"acctBtnCust",suppliers:"acctBtnSupp",
+               trial:"acctBtnTrial",pl:"acctBtnPL",bs:"acctBtnBS",csv:"acctBtnCSV"};
+    for(const k in map){
+      const b=document.getElementById(map[k]);
+      if(b) b.className = (k===t ? "btn" : "btn2");
+    }
+    renderAccounting();
+  };
+  window.manualRebuildAccounting=function(){
+    rebuildAccounting(); saveDB(); refreshAll(); toast("Journals rebuilt");
+  };
+
+  function tbl(headers, rows){
+    return `<div class="tablewrap"><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead>
+      <tbody>${rows.length?rows.join(""):`<tr><td colspan="${headers.length}">No data.</td></tr>`}</tbody></table></div>`;
+  }
+
+  function renderAccounting(){
+    const el=document.getElementById("acctContent"); if(!el) return;
+    if(typeof canAdmin==="function" && !canAdmin()){ el.innerHTML="<p class='muted'>Accounting is available only to Head Office.</p>"; return; }
+    const tab=window._acctTab;
+
+    if(tab==="coa"){
+      const rows=db.accounts.map(a=>{
+        const s=acctSum(a.code); const bal=s.balance; const dn=isDebitNormal(a.code);
+        const disp=dn?bal:-bal;
+        return `<tr><td>${a.code}</td><td>${esc(a.name)}</td><td>${a.type}</td>
+          <td>${s.debit?money(s.debit):"—"}</td><td>${s.credit?money(s.credit):"—"}</td>
+          <td class="${disp<0?'kpi-red':'kpi-green'}"><b>${money(Math.abs(disp))} ${disp<0?"Cr":"Dr"}</b></td></tr>`;
+      });
+      el.innerHTML=tbl(["Code","Account","Type","Debit","Credit","Balance"],rows);
+    }
+
+    if(tab==="journal"){
+      const j=db.journal.slice().reverse().slice(0,300);
+      const html=j.map(je=>{
+        const inner=je.lines.map(l=>`<tr><td style="padding-left:30px">${l.account} ${esc(acctName(l.account))}${l.party?" <span class='small'>["+esc(l.party)+"]</span>":""}</td>
+          <td>${l.debit?money(l.debit):""}</td><td>${l.credit?money(l.credit):""}</td></tr>`).join("");
+        return `<tr><td><b>${esc(je.id)}</b><br><span class="small">${esc(je.date)}</span></td>
+          <td colspan="3">${esc(je.narration)}
+            <table style="min-width:0;margin-top:4px">${inner}</table>
+          </td></tr>`;
+      });
+      el.innerHTML=`<div class="tablewrap"><table><thead><tr><th>JE</th><th>Details / Narration</th></tr></thead>
+        <tbody>${html.length?html.join(""):`<tr><td colspan="2">No journal entries yet.</td></tr>`}</tbody></table></div>`;
+    }
+
+    if(tab==="customers"){
+      const customers=[...new Set((db.sales||[]).map(s=>s.customer).filter(Boolean))];
+      el.innerHTML = customers.length ? customers.map(c=>{
+        const s=acctPartySum("1100",c);
+        const rows=[];
+        for(const je of db.journal) for(const l of je.lines){
+          if(l.account==="1100" && String(l.party||"").toLowerCase()===c.toLowerCase()){
+            rows.push({date:je.date, narr:je.narration, dr:num(l.debit), cr:num(l.credit)});
+          }
+        }
+        let running=0;
+        const body=rows.map(r=>{
+          running += r.dr - r.cr;
+          return `<tr><td>${r.date}</td><td>${esc(r.narr)}</td><td>${r.dr?money(r.dr):""}</td><td>${r.cr?money(r.cr):""}</td><td>${money(running)}</td></tr>`;
+        }).join("");
+        return `<div class="card" style="margin-bottom:10px">
+          <div class="section-title">${esc(c)} — Balance: <span class="${s.balance>0?'kpi-red':'kpi-green'}">${money(s.balance)}</span></div>
+          <div class="tablewrap"><table><thead><tr><th>Date</th><th>Description</th><th>Debit</th><th>Credit</th><th>Running</th></tr></thead>
+          <tbody>${body||"<tr><td colspan='5'>No entries.</td></tr>"}</tbody></table></div>
+        </div>`;
+      }).join("") : "<p class='muted'>No customers yet.</p>";
+    }
+
+    if(tab==="suppliers"){
+      const sups=[...new Set((db.purchases||[]).map(p=>p.supplier).filter(Boolean))];
+      el.innerHTML = sups.length ? sups.map(sup=>{
+        const s=acctPartySum("2000",sup);
+        const rows=[];
+        for(const je of db.journal) for(const l of je.lines){
+          if(l.account==="2000" && String(l.party||"").toLowerCase()===sup.toLowerCase()){
+            rows.push({date:je.date, narr:je.narration, dr:num(l.debit), cr:num(l.credit)});
+          }
+        }
+        let running=0;
+        const body=rows.map(r=>{
+          running += r.cr - r.dr;
+          return `<tr><td>${r.date}</td><td>${esc(r.narr)}</td><td>${r.dr?money(r.dr):""}</td><td>${r.cr?money(r.cr):""}</td><td>${money(running)}</td></tr>`;
+        }).join("");
+        return `<div class="card" style="margin-bottom:10px">
+          <div class="section-title">${esc(sup)} — Owed: <span class="${s.balance<0?'kpi-red':'kpi-green'}">${money(-s.balance)}</span></div>
+          <div class="tablewrap"><table><thead><tr><th>Date</th><th>Description</th><th>Paid</th><th>Billed</th><th>Running</th></tr></thead>
+          <tbody>${body||"<tr><td colspan='5'>No entries.</td></tr>"}</tbody></table></div>
+        </div>`;
+      }).join("") : "<p class='muted'>No suppliers yet.</p>";
+    }
+
+    if(tab==="trial"){
+      let td=0, tc=0;
+      const rows=db.accounts.map(a=>{
+        const s=acctSum(a.code);
+        td+=s.debit; tc+=s.credit;
+        return `<tr><td>${a.code}</td><td>${esc(a.name)}</td>
+          <td>${s.debit?money(s.debit):""}</td><td>${s.credit?money(s.credit):""}</td></tr>`;
+      });
+      rows.push(`<tr style="background:#f7f3f7"><td colspan="2"><b>Total</b></td>
+        <td><b>${money(td)}</b></td><td><b>${money(tc)}</b></td></tr>`);
+      el.innerHTML=tbl(["Code","Account","Debit","Credit"],rows);
+    }
+
+    if(tab==="pl"){
+      const income=db.accounts.filter(a=>a.type==="income");
+      const expense=db.accounts.filter(a=>a.type==="expense");
+      const iRows=income.map(a=>{const s=acctSum(a.code); return `<tr><td>${a.code}</td><td>${esc(a.name)}</td><td>${money(s.balance)}</td></tr>`}).join("");
+      const eRows=expense.map(a=>{const s=acctSum(a.code); return `<tr><td>${a.code}</td><td>${esc(a.name)}</td><td>${money(s.balance)}</td></tr>`}).join("");
+      const totInc=income.reduce((s,a)=>s+acctSum(a.code).balance,0);
+      const totExp=expense.reduce((s,a)=>s+acctSum(a.code).balance,0);
+      const net=totInc-totExp;
+      el.innerHTML=`
+        <div class="grid2">
+          <div><div class="section-title">Income</div><div class="tablewrap"><table><thead><tr><th>Code</th><th>Account</th><th>Amount</th></tr></thead>
+            <tbody>${iRows}<tr style="background:#f7f3f7"><td colspan="2"><b>Total Income</b></td><td><b>${money(totInc)}</b></td></tr></tbody></table></div></div>
+          <div><div class="section-title">Expenses</div><div class="tablewrap"><table><thead><tr><th>Code</th><th>Account</th><th>Amount</th></tr></thead>
+            <tbody>${eRows}<tr style="background:#f7f3f7"><td colspan="2"><b>Total Expenses</b></td><td><b>${money(totExp)}</b></td></tr></tbody></table></div></div>
+        </div>
+        <div class="card" style="margin-top:15px"><div class="section-title">Net Profit</div>
+          <div class="metric ${net>=0?'kpi-green':'kpi-red'}">${money(net)}</div>
+          <p class="muted">Net Profit = Total Income − Total Expenses</p>
+        </div>`;
+    }
+
+    if(tab==="bs"){
+      const assets=db.accounts.filter(a=>a.type==="asset");
+      const liabs=db.accounts.filter(a=>a.type==="liability");
+      const eq=db.accounts.filter(a=>a.type==="equity");
+      const income=db.accounts.filter(a=>a.type==="income");
+      const expense=db.accounts.filter(a=>a.type==="expense");
+      const totInc=income.reduce((s,a)=>s+acctSum(a.code).balance,0);
+      const totExp=expense.reduce((s,a)=>s+acctSum(a.code).balance,0);
+      const netProfit=totInc-totExp;
+      const ta=assets.reduce((s,a)=>s+acctSum(a.code).balance,0);
+      const tl=liabs.reduce((s,a)=>s-acctSum(a.code).balance,0);
+      const te=eq.reduce((s,a)=>s-acctSum(a.code).balance,0)+netProfit;
+      el.innerHTML=`
+        <div class="grid2">
+          <div><div class="section-title">Assets</div><div class="tablewrap"><table><thead><tr><th>Code</th><th>Account</th><th>Amount</th></tr></thead>
+            <tbody>${assets.map(a=>`<tr><td>${a.code}</td><td>${esc(a.name)}</td><td>${money(acctSum(a.code).balance)}</td></tr>`).join("")}
+            <tr style="background:#f7f3f7"><td colspan="2"><b>Total Assets</b></td><td><b>${money(ta)}</b></td></tr></tbody></table></div></div>
+          <div>
+            <div class="section-title">Liabilities</div><div class="tablewrap"><table><thead><tr><th>Code</th><th>Account</th><th>Amount</th></tr></thead>
+            <tbody>${liabs.map(a=>`<tr><td>${a.code}</td><td>${esc(a.name)}</td><td>${money(-acctSum(a.code).balance)}</td></tr>`).join("")}
+            <tr style="background:#f7f3f7"><td colspan="2"><b>Total Liabilities</b></td><td><b>${money(tl)}</b></td></tr></tbody></table></div>
+            <div class="section-title" style="margin-top:15px">Equity</div><div class="tablewrap"><table>
+            <tbody>${eq.map(a=>`<tr><td>${a.code}</td><td>${esc(a.name)}</td><td>${money(-acctSum(a.code).balance)}</td></tr>`).join("")}
+            <tr><td>3100</td><td>Current Period Profit</td><td>${money(netProfit)}</td></tr>
+            <tr style="background:#f7f3f7"><td colspan="2"><b>Total Equity</b></td><td><b>${money(te)}</b></td></tr></tbody></table></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:15px">
+          <b>Assets:</b> ${money(ta)} &nbsp;•&nbsp; <b>Liabilities + Equity:</b> ${money(tl+te)}
+          ${Math.abs(ta-(tl+te))<0.01?' <span class="kpi-green">✓ Balanced</span>':' <span class="kpi-red">✗ Out of balance by '+money(ta-(tl+te))+'</span>'}
+        </div>`;
+    }
+
+    if(tab==="csv" && window.renderCSVExports) window.renderCSVExports();
+  }
+
+  /* ---- payments ---- */
+  function partyList(type){
+    if(type==="received") return [...new Set((db.sales||[]).map(s=>s.customer).filter(Boolean))];
+    if(type==="paid")     return [...new Set((db.purchases||[]).map(p=>p.supplier).filter(Boolean))];
+    if(type==="labour")   return db.branches.map(b=>b.name);
+    return [];
+  }
+  window.renderPayParty=function(){
+    const t=document.getElementById("payType")?.value;
+    const list=partyList(t);
+    const el=document.getElementById("payParty"); if(!el) return;
+    el.innerHTML=list.map(x=>`<option>${esc(x)}</option>`).join("") || "<option value=''>— none —</option>";
+  };
+  window.savePayment=function(){
+    const data={
+      date:document.getElementById("payDate").value,
+      type:document.getElementById("payType").value,
+      party:document.getElementById("payParty").value,
+      amount:num(document.getElementById("payAmount").value),
+      mode:document.getElementById("payMode").value,
+      note:document.getElementById("payNote").value
+    };
+    if(data.amount<=0){alert("Enter an amount");return}
+    const eid=document.getElementById("editPaymentId").value;
+    if(eid) Object.assign(db.payments.find(x=>x.id===eid),data);
+    else db.payments.push({id:id("PAY"),...data});
+    saveDB();clearPaymentForm();refreshAll();toast("Payment saved");
+  };
+  window.clearPaymentForm=function(){
+    ["payNote","editPaymentId"].forEach(x=>{const e=document.getElementById(x); if(e) e.value="";});
+    const d=document.getElementById("payDate"); if(d) d.value=today();
+    const a=document.getElementById("payAmount"); if(a) a.value=0;
+    renderPayParty();
+  };
+  window.editPayment=function(i){
+    const p=db.payments.find(x=>x.id===i); if(!p) return;
+    document.getElementById("payDate").value=p.date;
+    document.getElementById("payType").value=p.type;
+    renderPayParty();
+    document.getElementById("payParty").value=p.party;
+    document.getElementById("payAmount").value=p.amount;
+    document.getElementById("payMode").value=p.mode;
+    document.getElementById("payNote").value=p.note||"";
+    document.getElementById("editPaymentId").value=i;
+    showPage("payments");
+  };
+  window.delPayment=function(i){
+    if(!confirm("Delete payment?")) return;
+    db.payments=db.payments.filter(x=>x.id!==i);
+    saveDB();refreshAll();toast("Payment deleted");
+  };
+  function renderPayments(){
+    const el=document.getElementById("paymentTable"); if(!el) return;
+    renderPayParty();
+    el.innerHTML = (db.payments||[]).slice().reverse().map(p=>`
+      <tr><td>${p.date}</td><td>${p.type}</td><td>${esc(p.party)}</td><td>${money(p.amount)}</td>
+      <td>${p.mode}</td><td>${esc(p.note||"")}</td>
+      <td><button class="btn2" onclick="editPayment('${p.id}')">Edit</button>
+          <button class="danger" onclick="delPayment('${p.id}')">Delete</button></td></tr>`).join("")
+      || `<tr><td colspan="7">No payments recorded.</td></tr>`;
+  }
+
+  /* ---- opening balances ---- */
+  function renderOpening(){
+    const d=document.getElementById("opDate"); if(!d) return;
+    const op=db.opening||{};
+    const map=[["opDate","date"],["opCash","cash"],["opBank","bank"],["opRaw","raw"],["opFG","fg"],["opRecv","recv"],["opPay","pay"]];
+    for(const [id,key] of map){
+      const el=document.getElementById(id); if(!el) continue;
+      if(document.activeElement===el) continue;
+      if(key==="date") el.value=op.date||"";
+      else el.value=op[key]||0;
+    }
+  }
+  window.saveOpening=function(){
+    db.opening={
+      date:document.getElementById("opDate").value,
+      cash:num(document.getElementById("opCash").value),
+      bank:num(document.getElementById("opBank").value),
+      raw:num(document.getElementById("opRaw").value),
+      fg:num(document.getElementById("opFG").value),
+      recv:num(document.getElementById("opRecv").value),
+      pay:num(document.getElementById("opPay").value)
+    };
+    if(!db.opening.date){alert("Enter the opening date");return}
+    saveDB();refreshAll();toast("Opening balances saved");
+  };
+
+  function boot(){
+    ensureAcct();
+    injectPages();
+    const pd=document.getElementById("payDate"); if(pd) pd.value=today();
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot);
+  else boot();
+})();
+</script>
+
+<!-- ============================================================ -->
+<!-- ==================== CSV EXPORTS MODULE ==================== -->
+<!-- ============================================================ -->
+<script>
+(function(){
+  if(!window.acctTab){ console.warn("[CSV] Accounting module missing"); return; }
+
+  function csvEsc(v){
+    v = String(v ?? "");
+    return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g,'""') + '"' : v;
+  }
+  function toCSV(rows){ return rows.map(r=>r.map(csvEsc).join(",")).join("\r\n"); }
+  function downloadCSV(filename, rows){
+    const csv = "\uFEFF" + toCSV(rows);
+    const url = URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"}));
+    const a = document.createElement("a");
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url), 1500);
+    if(typeof toast==="function") toast("Exported: "+filename);
+  }
+  function n2(v){ return Number(v||0).toFixed(2); }
+  function n3(v){ return Number(v||0).toFixed(3); }
+  function fdate(d){
+    const m = String(d||"").match(/^(\d{4})-(\d{2})-(\d{2})/);
+    return m ? m[3]+"-"+m[2]+"-"+m[1] : (d||"");
+  }
+  function acctName(code){
+    const a=(db.accounts||[]).find(x=>x.code===code); return a?a.name:code;
+  }
+  function stamp(){
+    const from=document.getElementById("csvFrom")?.value||"";
+    const to  =document.getElementById("csvTo")?.value  ||"";
+    if(from||to) return `${from||"start"}_to_${to||"end"}`;
+    return new Date().toISOString().slice(0,19).replace(/[:T]/g,"-");
+  }
+  function inRange(d,from,to){
+    if(!d) return !from && !to;
+    if(from && d<from) return false;
+    if(to   && d>to  ) return false;
+    return true;
+  }
+  function range(){return{
+    from:document.getElementById("csvFrom")?.value||"",
+    to:  document.getElementById("csvTo")?.value  ||""
+  };}
+  function fJournal(){const {from,to}=range();return (db.journal||[]).filter(j=>inRange(j.date,from,to));}
+  function fByDate(list){const {from,to}=range();return (list||[]).filter(x=>inRange(x.date,from,to));}
+  function acctSumUpTo(code,to){
+    let d=0,c=0;
+    for(const j of db.journal||[]){
+      if(to && j.date>to) continue;
+      for(const l of j.lines||[]) if(l.account===code){d+=Number(l.debit)||0;c+=Number(l.credit)||0;}
+    }
+    return {debit:d,credit:c,balance:d-c};
+  }
+  function acctSumRange(code,from,to){
+    let d=0,c=0;
+    for(const j of db.journal||[]){
+      if(!inRange(j.date,from,to)) continue;
+      for(const l of j.lines||[]) if(l.account===code){d+=Number(l.debit)||0;c+=Number(l.credit)||0;}
+    }
+    return {debit:d,credit:c,balance:d-c};
+  }
+  function voucherType(n){
+    n=String(n||"").toLowerCase();
+    if(n.startsWith("purchase")) return "Purchase";
+    if(n.startsWith("sale"))     return "Sales";
+    if(n.startsWith("receipt"))  return "Receipt";
+    if(n.startsWith("payment"))  return "Payment";
+    if(n.startsWith("labour paid")) return "Payment";
+    if(n.startsWith("opening"))  return "Opening";
+    return "Journal";
+  }
+  function tallyLedger(l){
+    if((l.account==="1100"||l.account==="2000") && l.party && String(l.party).trim())
+      return String(l.party).trim();
+    return acctName(l.account);
+  }
+
+  window.csvRangeThisMonth=function(){
+    const n=new Date(), f=new Date(n.getFullYear(),n.getMonth(),1);
+    document.getElementById("csvFrom").value=f.toISOString().slice(0,10);
+    document.getElementById("csvTo").value=n.toISOString().slice(0,10);
+  };
+  window.csvRangeThisYear=function(){
+    const y=new Date().getFullYear();
+    document.getElementById("csvFrom").value=y+"-01-01";
+    document.getElementById("csvTo").value=new Date().toISOString().slice(0,10);
+  };
+  window.csvRangeAll=function(){
+    document.getElementById("csvFrom").value="";
+    document.getElementById("csvTo").value="";
+  };
+
+  window.exportJournalCSV=function(){
+    const rows=[["Date","Voucher No","Voucher Type","Reference","Narration","Account Code","Account Name","Party","Debit","Credit"]];
+    for(const j of fJournal()){
+      const vt=voucherType(j.narration);
+      for(const l of j.lines||[]){
+        rows.push([j.date||"",j.id||"",vt,j.ref||"",j.narration||"",
+          l.account||"",acctName(l.account),l.party||"",
+          Number(l.debit)>0?n2(l.debit):"", Number(l.credit)>0?n2(l.credit):""]);
+      }
+    }
+    downloadCSV(`journal_${stamp()}.csv`,rows);
+  };
+
+  window.exportTallyCSV=function(){
+    const rows=[["Voucher Date","Voucher Type","Voucher Number","Narration","Ledger Name","Debit","Credit"]];
+    for(const j of fJournal()){
+      const vt=voucherType(j.narration);
+      for(const l of j.lines||[]){
+        rows.push([fdate(j.date),vt,j.id||"",j.narration||"",tallyLedger(l),
+          Number(l.debit)>0?n2(l.debit):"", Number(l.credit)>0?n2(l.credit):""]);
+      }
+    }
+    downloadCSV(`tally_journal_${stamp()}.csv`,rows);
+  };
+
+  window.exportCOACSV=function(){
+    const rows=[["Code","Account Name","Type","Debit-Normal","Current Balance"]];
+    for(const a of db.accounts||[]){
+      const s=acctSumUpTo(a.code,"");
+      const dn=(a.type==="asset"||a.type==="expense");
+      rows.push([a.code,a.name,a.type,dn?"Yes":"No",n2(dn?s.balance:-s.balance)]);
+    }
+    downloadCSV(`chart_of_accounts_${stamp()}.csv`,rows);
+  };
+
+  window.exportCustomerLedgersCSV=function(){
+    const {from,to}=range();
+    const customers=[...new Set((db.sales||[]).map(s=>s.customer).filter(Boolean))];
+    const rows=[["Customer","Date","Voucher No","Narration","Debit","Credit","Running Balance"]];
+    for(const c of customers){
+      let run=0, any=false;
+      for(const j of db.journal||[]){
+        if(!inRange(j.date,from,to)) continue;
+        for(const l of j.lines||[]){
+          if(l.account!=="1100") continue;
+          if(String(l.party||"").toLowerCase()!==c.toLowerCase()) continue;
+          const dr=Number(l.debit)||0, cr=Number(l.credit)||0;
+          run+=dr-cr;
+          rows.push([c,j.date||"",j.id||"",j.narration||"",n2(dr),n2(cr),n2(run)]);
+          any=true;
+        }
+      }
+      if(!any) rows.push([c,"","","No transactions","","","0.00"]);
+    }
+    downloadCSV(`customer_ledgers_${stamp()}.csv`,rows);
+  };
+
+  window.exportSupplierLedgersCSV=function(){
+    const {from,to}=range();
+    const sups=[...new Set((db.purchases||[]).map(p=>p.supplier).filter(Boolean))];
+    const rows=[["Supplier","Date","Voucher No","Narration","Debit (Paid)","Credit (Billed)","Running Owed"]];
+    for(const sup of sups){
+      let run=0, any=false;
+      for(const j of db.journal||[]){
+        if(!inRange(j.date,from,to)) continue;
+        for(const l of j.lines||[]){
+          if(l.account!=="2000") continue;
+          if(String(l.party||"").toLowerCase()!==sup.toLowerCase()) continue;
+          const dr=Number(l.debit)||0, cr=Number(l.credit)||0;
+          run+=cr-dr;
+          rows.push([sup,j.date||"",j.id||"",j.narration||"",n2(dr),n2(cr),n2(run)]);
+          any=true;
+        }
+      }
+      if(!any) rows.push([sup,"","","No transactions","","","0.00"]);
+    }
+    downloadCSV(`supplier_ledgers_${stamp()}.csv`,rows);
+  };
+
+  window.exportAllLedgersCSV=function(){
+    const {from,to}=range();
+    const rows=[["Account Code","Account Name","Type","Date","Voucher No","Narration","Party","Debit","Credit","Running Balance"]];
+    for(const a of db.accounts||[]){
+      let run=0, any=false;
+      for(const j of db.journal||[]){
+        if(!inRange(j.date,from,to)) continue;
+        for(const l of j.lines||[]){
+          if(l.account!==a.code) continue;
+          const dr=Number(l.debit)||0, cr=Number(l.credit)||0;
+          run+=dr-cr;
+          rows.push([a.code,a.name,a.type,j.date||"",j.id||"",j.narration||"",l.party||"",n2(dr),n2(cr),n2(run)]);
+          any=true;
+        }
+      }
+      if(!any) rows.push([a.code,a.name,a.type,"","","No transactions","","","",""]);
+    }
+    downloadCSV(`all_ledgers_${stamp()}.csv`,rows);
+  };
+
+  window.exportPurchaseRegisterCSV=function(){
+    const rows=[["Date","Voucher No","Supplier","Material","Qty","Unit","Rate","Amount","Payment Mode"]];
+    for(const p of fByDate(db.purchases||[])){
+      rows.push([p.date||"",p.id||"",p.supplier||"",p.material||"",n3(p.qty),p.unit||"",
+        n2(p.price),n2(Number(p.qty)*Number(p.price)),p.payment||""]);
+    }
+    downloadCSV(`purchase_register_${stamp()}.csv`,rows);
+  };
+
+  window.exportSalesRegisterCSV=function(){
+    const rows=[["Date","Voucher No","Customer","Product","Qty","Rate","Amount","Payment Mode","Order Ref"]];
+    for(const s of fByDate(db.sales||[])){
+      rows.push([s.date||"",s.id||"",s.customer||"",s.product||"",n3(s.qty),n2(s.price),
+        n2(Number(s.qty)*Number(s.price)),s.payment||"",s.orderId||""]);
+    }
+    downloadCSV(`sales_register_${stamp()}.csv`,rows);
+  };
+
+  window.exportPaymentsCSV=function(){
+    const rows=[["Date","Voucher No","Type","Party","Amount","Mode","Note"]];
+    for(const p of fByDate(db.payments||[])){
+      rows.push([p.date||"",p.id||"",p.type||"",p.party||"",n2(p.amount),p.mode||"",p.note||""]);
+    }
+    downloadCSV(`payments_${stamp()}.csv`,rows);
+  };
+
+  window.exportOrdersCSV=function(){
+    const rows=[["Order ID","Date","Customer","Product","Qty","Sell Price","Amount","Branch","Status","Material Issued","FG Received"]];
+    for(const o of fByDate(db.orders||[])){
+      rows.push([o.id||"",o.date||"",o.customer||"",o.product||"",n3(o.qty),n2(o.price),
+        n2(Number(o.qty)*Number(o.price)),
+        (typeof branchName==="function"?branchName(o.branchId):""),o.status||"",
+        o.materialIssued?"Yes":"No", o.fgReceived?"Yes":"No"]);
+    }
+    downloadCSV(`orders_${stamp()}.csv`,rows);
+  };
+
+  window.exportStockMovementsCSV=function(){
+    const rows=[["Date","Type","Item","Qty","Unit","Reference","Branch"]];
+    for(const m of fByDate(db.movements||[])){
+      rows.push([m.date||"",m.type||"",m.item||"",n3(m.qty),m.unit||"",m.reference||"",m.branch||""]);
+    }
+    downloadCSV(`stock_movements_${stamp()}.csv`,rows);
+  };
+
+  window.exportBranchStockCSV=function(){
+    const rows=[["Branch","Material","Qty","Unit","Price","Value"]];
+    for(const x of Object.values(db.bs||{})){
+      rows.push([(typeof branchName==="function"?branchName(x.branch):""),
+        x.name||"",n3(x.qty),x.unit||"",n2(x.price),n2(Number(x.qty)*Number(x.price))]);
+    }
+    downloadCSV(`branch_stock_${stamp()}.csv`,rows);
+  };
+
+  window.exportTrialBalanceCSV=function(){
+    const {to}=range();
+    const rows=[["Code","Account Name","Type","Debit","Credit"]];
+    let td=0,tc=0;
+    for(const a of db.accounts||[]){
+      const s=acctSumUpTo(a.code,to);
+      td+=s.debit; tc+=s.credit;
+      rows.push([a.code,a.name,a.type,s.debit?n2(s.debit):"",s.credit?n2(s.credit):""]);
+    }
+    rows.push(["","TOTAL","",n2(td),n2(tc)]);
+    rows.push(["","Difference (should be 0)","",n2(td-tc),""]);
+    downloadCSV(`trial_balance_${stamp()}.csv`,rows);
+  };
+
+  window.exportPLCSV=function(){
+    const {from,to}=range();
+    const rows=[["Section","Code","Account Name","Amount"]];
+    const income=(db.accounts||[]).filter(a=>a.type==="income");
+    const expense=(db.accounts||[]).filter(a=>a.type==="expense");
+    let ti=0,te=0;
+    rows.push(["INCOME","","",""]);
+    for(const a of income){
+      const s=acctSumRange(a.code,from,to); ti+=s.balance;
+      if(Math.abs(s.balance)>0.001) rows.push(["",a.code,a.name,n2(s.balance)]);
+    }
+    rows.push(["","","Total Income",n2(ti)]);
+    rows.push(["EXPENSES","","",""]);
+    for(const a of expense){
+      const s=acctSumRange(a.code,from,to); te+=s.balance;
+      if(Math.abs(s.balance)>0.001) rows.push(["",a.code,a.name,n2(s.balance)]);
+    }
+    rows.push(["","","Total Expenses",n2(te)]);
+    rows.push(["","","NET PROFIT",n2(ti-te)]);
+    downloadCSV(`profit_and_loss_${stamp()}.csv`,rows);
+  };
+
+  window.exportBSCSV=function(){
+    const {to}=range();
+    const rows=[["Section","Code","Account Name","Amount"]];
+    const assets=(db.accounts||[]).filter(a=>a.type==="asset");
+    const liabs =(db.accounts||[]).filter(a=>a.type==="liability");
+    const eq    =(db.accounts||[]).filter(a=>a.type==="equity");
+    const income=(db.accounts||[]).filter(a=>a.type==="income");
+    const expense=(db.accounts||[]).filter(a=>a.type==="expense");
+    let ta=0,tl=0,te=0;
+    rows.push(["ASSETS","","",""]);
+    for(const a of assets){
+      const s=acctSumUpTo(a.code,to); ta+=s.balance;
+      if(Math.abs(s.balance)>0.001) rows.push(["",a.code,a.name,n2(s.balance)]);
+    }
+    rows.push(["","","Total Assets",n2(ta)]);
+    rows.push(["LIABILITIES","","",""]);
+    for(const a of liabs){
+      const s=acctSumUpTo(a.code,to); const bal=-s.balance; tl+=bal;
+      if(Math.abs(bal)>0.001) rows.push(["",a.code,a.name,n2(bal)]);
+    }
+    rows.push(["","","Total Liabilities",n2(tl)]);
+    let net=0;
+    for(const a of income)  net+=acctSumUpTo(a.code,to).balance;
+    for(const a of expense) net-=acctSumUpTo(a.code,to).balance;
+    rows.push(["EQUITY","","",""]);
+    for(const a of eq){
+      const s=acctSumUpTo(a.code,to); const bal=-s.balance; te+=bal;
+      if(Math.abs(bal)>0.001) rows.push(["",a.code,a.name,n2(bal)]);
+    }
+    rows.push(["","","Current Period Profit",n2(net)]);
+    te+=net;
+    rows.push(["","","Total Equity",n2(te)]);
+    rows.push(["","","Total Liabilities + Equity",n2(tl+te)]);
+    rows.push(["","","Check (Assets − L&E, should be 0)",n2(ta-tl-te)]);
+    downloadCSV(`balance_sheet_${stamp()}.csv`,rows);
+  };
+
+  window.exportAllCSV=function(){
+    if(!confirm("This will download ~15 CSV files.\n\nAllow multiple downloads when the browser asks.\n\nContinue?")) return;
+    const fns=[exportJournalCSV,exportTallyCSV,exportCOACSV,
+      exportCustomerLedgersCSV,exportSupplierLedgersCSV,exportAllLedgersCSV,
+      exportPurchaseRegisterCSV,exportSalesRegisterCSV,exportPaymentsCSV,
+      exportOrdersCSV,exportStockMovementsCSV,exportBranchStockCSV,
+      exportTrialBalanceCSV,exportPLCSV,exportBSCSV];
+    fns.forEach((fn,i)=>setTimeout(fn,i*300));
+  };
+
+  window.renderCSVExports=function(){
+    const prevFrom=document.getElementById("csvFrom")?.value||"";
+    const prevTo  =document.getElementById("csvTo")?.value  ||"";
+    const el=document.getElementById("acctContent"); if(!el) return;
+    el.innerHTML=`
+      <div class="card" style="margin-bottom:12px">
+        <div class="section-title">📤 CSV Exports for your Accountant</div>
+        <p class="muted">Filenames include the date range. Files are UTF-8 with BOM so Excel opens ₹ correctly. Amounts are plain numbers (no commas).</p>
+        <div class="formgrid" style="max-width:520px">
+          <div><label>From Date (optional)</label><input id="csvFrom" type="date"></div>
+          <div><label>To Date (optional)</label><input id="csvTo" type="date"></div>
+        </div>
+        <div class="actions" style="margin-top:10px">
+          <button class="btn2" onclick="csvRangeThisMonth()">This Month</button>
+          <button class="btn2" onclick="csvRangeThisYear()">This Year</button>
+          <button class="btn2" onclick="csvRangeAll()">All Time</button>
+          <button class="btn" style="margin-left:auto" onclick="exportAllCSV()">📦 Export All (15 files)</button>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card"><div class="section-title">Books of Account</div>
+          <div class="actions" style="flex-direction:column;align-items:stretch">
+            <button class="btn2" onclick="exportJournalCSV()">📘 Journal Entries</button>
+            <button class="btn2" onclick="exportTallyCSV()">📗 Tally Journal Import</button>
+            <button class="btn2" onclick="exportCOACSV()">📋 Chart of Accounts</button>
+          </div></div>
+        <div class="card"><div class="section-title">Ledgers</div>
+          <div class="actions" style="flex-direction:column;align-items:stretch">
+            <button class="btn2" onclick="exportCustomerLedgersCSV()">👤 Customer Ledgers (AR)</button>
+            <button class="btn2" onclick="exportSupplierLedgersCSV()">🏭 Supplier Ledgers (AP)</button>
+            <button class="btn2" onclick="exportAllLedgersCSV()">📑 All Account Ledgers</button>
+          </div></div>
+        <div class="card"><div class="section-title">Registers</div>
+          <div class="actions" style="flex-direction:column;align-items:stretch">
+            <button class="btn2" onclick="exportPurchaseRegisterCSV()">📥 Purchase Register</button>
+            <button class="btn2" onclick="exportSalesRegisterCSV()">📤 Sales Register</button>
+            <button class="btn2" onclick="exportPaymentsCSV()">💳 Payment Register</button>
+            <button class="btn2" onclick="exportOrdersCSV()">📝 Order Register</button>
+            <button class="btn2" onclick="exportStockMovementsCSV()">🔄 Stock Movements</button>
+            <button class="btn2" onclick="exportBranchStockCSV()">🏢 Branch Stock Snapshot</button>
+          </div></div>
+        <div class="card"><div class="section-title">Statements</div>
+          <div class="actions" style="flex-direction:column;align-items:stretch">
+            <button class="btn2" onclick="exportTrialBalanceCSV()">⚖️ Trial Balance</button>
+            <button class="btn2" onclick="exportPLCSV()">📈 Profit & Loss</button>
+            <button class="btn2" onclick="exportBSCSV()">🏦 Balance Sheet</button>
+          </div></div>
+      </div>
+      <div class="notice" style="margin-top:12px">
+        <b>Tally users:</b> The "Tally Journal Import" file uses Tally's standard Journal CSV format. Dates are DD-MM-YYYY and customers/suppliers appear as their own ledgers.
+      </div>
+      <div class="notice">
+        <b>Excel / Google Sheets:</b> All other files open directly. Amounts are numeric — sum, pivot, format freely.
+      </div>`;
+    const f=document.getElementById("csvFrom"), t=document.getElementById("csvTo");
+    if(prevFrom||prevTo){ f.value=prevFrom; t.value=prevTo; }
+    else csvRangeThisYear();
+  };
+})();
+</script>
+
+<!-- Bottom-left badge -->
+<div id="v6SafetyBadge" style="position:fixed;left:12px;bottom:12px;z-index:90;
+background:#222;color:#fff;padding:7px 10px;border-radius:8px;font:12px Arial;opacity:.85">
+ERP V6.4 • Accounting
+</div>
+</body>
+</html>
